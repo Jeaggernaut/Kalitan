@@ -1,0 +1,23 @@
+.about {
+  padding: 3rem 1.5rem;
+}
+
+.about__grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.about__card h3 {
+  margin: 0 0 1rem;
+}
+
+.about__card p {
+  color: var(--text-muted);
+  line-height: 1.8;
+}
+
+@media (min-width: 900px) {
+  .about__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

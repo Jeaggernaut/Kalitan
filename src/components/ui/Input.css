@@ -1,0 +1,4 @@
+.kp-input{ display:block; margin-bottom:12px }
+.kp-input__label{ display:block; font-size:14px; margin-bottom:6px; color:#22543d }
+.kp-input__field{ width:100%; padding:10px 12px; border:1px solid #e2e8f0; border-radius:8px; background:white }
+.kp-input__field:focus{ outline:none; box-shadow:0 0 0 4px rgba(72,187,120,0.08); border-color:#68d391 }

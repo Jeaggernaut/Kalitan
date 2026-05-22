@@ -1,0 +1,36 @@
+.plans {
+  padding: 3rem 1.5rem;
+}
+
+.plans__grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.plan-card {
+  padding: 2rem;
+  border: 1px solid rgba(15, 118, 110, 0.12);
+}
+
+.plan-card__price {
+  color: var(--primary);
+  font-size: 2rem;
+  margin: 1rem 0;
+}
+
+.plan-card ul {
+  margin: 0;
+  padding-left: 1.2rem;
+  color: var(--text-muted);
+}
+
+.plan-card li {
+  margin-bottom: 0.75rem;
+  line-height: 1.75;
+}
+
+@media (min-width: 900px) {
+  .plans__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

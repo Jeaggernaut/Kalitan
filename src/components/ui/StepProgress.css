@@ -1,0 +1,6 @@
+.kp-step{ display:flex; gap:16px; margin-bottom:20px }
+.kp-step__item{ display:flex; flex-direction:column; align-items:center; width:140px }
+.kp-step__circle{ width:40px; height:40px; border-radius:50%; background:#edf7ef; color:#22543d; display:flex; align-items:center; justify-content:center; font-weight:700 }
+.kp-step__item.active .kp-step__circle{ background:#2f855a; color:white }
+.kp-step__item.done .kp-step__circle{ background:#68d391; color:white }
+.kp-step__label{ margin-top:8px; font-size:13px; text-align:center; color:#2d3748 }
