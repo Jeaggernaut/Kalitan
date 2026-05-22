@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import logo from '../../assets/logos/kalitan-logo.png'
 import { navLinks } from '../../utils/landingContent'
 import Button from '../ui/Button'
@@ -6,6 +7,7 @@ import ThemeToggle from '../ui/ThemeToggle'
 import './Navbar.css'
 
 export default function Navbar() {
+  const navigate = useNavigate()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('inicio')
 
@@ -60,13 +62,19 @@ export default function Navbar() {
 
         window.history.pushState(null, '', href)
         setActiveSection(sectionId)
+      } else {
+        navigate(`/${href}`)
       }
     }
 
     setIsMenuOpen(false)
   }
 
-  const closeMenu = () => setIsMenuOpen(false)
+  const navigateToAuth = (mode, type = '') => {
+    const typeParam = type ? `&type=${type}` : ''
+    setIsMenuOpen(false)
+    navigate(`/auth?mode=${mode}${typeParam}`)
+  }
 
   return (
     <header className="site-navbar">
@@ -94,14 +102,14 @@ export default function Navbar() {
 
           <div className="site-navbar__mobile-actions">
             <ThemeToggle />
-            <Button variant="primary" onClick={() => closeMenu()}>Afiliar negocio</Button>
+            <Button variant="primary" onClick={() => navigateToAuth('register', 'business')}>Afiliar negocio</Button>
           </div>
         </nav>
 
         <div className="site-navbar__actions">
           <ThemeToggle />
-          <Button variant="secondary">Iniciar sesión</Button>
-          <Button variant="primary">Afiliar negocio</Button>
+          <Button variant="secondary" onClick={() => navigateToAuth('login')}>Iniciar sesión</Button>
+          <Button variant="primary" onClick={() => navigateToAuth('register', 'business')}>Afiliar negocio</Button>
         </div>
 
         <button

@@ -33,7 +33,11 @@ export function HeroSection() {
         </div>
 
         <motion.div className="hero-section__visual" variants={revealItemVariants}>
-          <img src={heroImage} alt="Personas recibiendo alimentos rescatados" />
+          <span className="hero-visual-shape hero-visual-shape--ring" />
+          <span className="hero-visual-shape hero-visual-shape--pill" />
+          <div className="hero-image-card">
+            <img src={heroImage} alt="Personas recibiendo alimentos rescatados" />
+          </div>
           <div className="hero-badge hero-badge--top">
             <strong>Gratis</strong>
             <span>para voluntarios y beneficiarios</span>

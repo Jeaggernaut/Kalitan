@@ -24,6 +24,16 @@
   --background-grid-opacity: 0.5;
   --background-glow-opacity: 0.58;
   --background-deco-opacity: 0.42;
+  --hero-image-border: rgba(216, 245, 231, 0.1);
+  --hero-image-shadow: 0 42px 90px rgba(0, 0, 0, 0.45), 0 18px 44px rgba(64, 209, 139, 0.14);
+  --hero-badge-bg: rgba(5, 15, 12, 0.72);
+  --hero-badge-border: rgba(255, 255, 255, 0.08);
+  --hero-badge-shadow: 0 20px 46px rgba(0, 0, 0, 0.34);
+  --hero-badge-strong: #72e6a8;
+  --hero-badge-text: #c0d5ca;
+  --hero-shape-line: rgba(114, 230, 168, 0.18);
+  --hero-shape-soft: rgba(64, 209, 139, 0.14);
+  --hero-shape-strong: rgba(64, 209, 139, 0.18);
   --gradient-hero: radial-gradient(circle at 18% 10%, rgba(64, 209, 139, 0.18), transparent 28%),
     radial-gradient(circle at 88% 8%, rgba(255, 193, 74, 0.13), transparent 26%),
     linear-gradient(180deg, #07120e 0%, #101d18 100%);
