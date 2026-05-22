@@ -1,0 +1,59 @@
+"filename", "language", "JavaScript", "JavaScript JSX", "PostCSS", "XML", "comment", "blank", "total"
+"c:\Users\eleaz\Documentos\ReactProyectos\Kalitan\src\App.css", "PostCSS", 0, 0, 158, 0, 0, 27, 185
+"c:\Users\eleaz\Documentos\ReactProyectos\Kalitan\src\App.jsx", "JavaScript JSX", 0, 5, 0, 0, 0, 3, 8
+"c:\Users\eleaz\Documentos\ReactProyectos\Kalitan\src\assets\react.svg", "XML", 0, 0, 0, 1, 0, 0, 1
+"c:\Users\eleaz\Documentos\ReactProyectos\Kalitan\src\assets\vite.svg", "XML", 0, 0, 0, 1, 0, 1, 2
+"c:\Users\eleaz\Documentos\ReactProyectos\Kalitan\src\components\About\About.css", "PostCSS", 0, 0, 26, 0, 0, 5, 31
+"c:\Users\eleaz\Documentos\ReactProyectos\Kalitan\src\components\About\About.jsx", "JavaScript JSX", 0, 21, 0, 0, 0, 2, 23
+"c:\Users\eleaz\Documentos\ReactProyectos\Kalitan\src\components\Benefits\Benefits.css", "PostCSS", 0, 0, 28, 0, 0, 6, 34
+"c:\Users\eleaz\Documentos\ReactProyectos\Kalitan\src\components\Benefits\Benefits.jsx", "JavaScript JSX", 0, 19, 0, 0, 0, 2, 21
+"c:\Users\eleaz\Documentos\ReactProyectos\Kalitan\src\components\BusinessAffiliation\BusinessAffiliation.css", "PostCSS", 0, 0, 385, 0, 0, 66, 451
+"c:\Users\eleaz\Documentos\ReactProyectos\Kalitan\src\components\BusinessAffiliation\BusinessConfirmationStep.jsx", "JavaScript JSX", 0, 72, 0, 0, 0, 10, 82
+"c:\Users\eleaz\Documentos\ReactProyectos\Kalitan\src\components\BusinessAffiliation\BusinessContactStep.jsx", "JavaScript JSX", 0, 50, 0, 0, 0, 12, 62
+"c:\Users\eleaz\Documentos\ReactProyectos\Kalitan\src\components\BusinessAffiliation\BusinessInfoStep.jsx", "JavaScript JSX", 0, 85, 0, 0, 0, 14, 99
+"c:\Users\eleaz\Documentos\ReactProyectos\Kalitan\src\components\BusinessAffiliation\BusinessStepProgress.jsx", "JavaScript JSX", 0, 19, 0, 0, 0, 2, 21
+"c:\Users\eleaz\Documentos\ReactProyectos\Kalitan\src\components\BusinessAffiliation\BusinessSurplusStep.jsx", "JavaScript JSX", 0, 70, 0, 0, 0, 13, 83
+"c:\Users\eleaz\Documentos\ReactProyectos\Kalitan\src\components\Button\Button.css", "PostCSS", 0, 0, 27, 0, 0, 5, 32
+"c:\Users\eleaz\Documentos\ReactProyectos\Kalitan\src\components\Button\Button.jsx", "JavaScript JSX", 0, 8, 0, 0, 0, 2, 10
+"c:\Users\eleaz\Documentos\ReactProyectos\Kalitan\src\components\Card\Card.css", "PostCSS", 0, 0, 7, 0, 0, 1, 8
+"c:\Users\eleaz\Documentos\ReactProyectos\Kalitan\src\components\Card\Card.jsx", "JavaScript JSX", 0, 8, 0, 0, 0, 2, 10
+"c:\Users\eleaz\Documentos\ReactProyectos\Kalitan\src\components\Footer\Footer.css", "PostCSS", 0, 0, 33, 0, 0, 6, 39
+"c:\Users\eleaz\Documentos\ReactProyectos\Kalitan\src\components\Footer\Footer.jsx", "JavaScript JSX", 0, 16, 0, 0, 0, 2, 18
+"c:\Users\eleaz\Documentos\ReactProyectos\Kalitan\src\components\Hero\Hero.css", "PostCSS", 0, 0, 191, 0, 0, 29, 220
+"c:\Users\eleaz\Documentos\ReactProyectos\Kalitan\src\components\Hero\Hero.jsx", "JavaScript JSX", 0, 42, 0, 0, 0, 6, 48
+"c:\Users\eleaz\Documentos\ReactProyectos\Kalitan\src\components\HowItWorks\HowItWorks.css", "PostCSS", 0, 0, 79, 0, 0, 12, 91
+"c:\Users\eleaz\Documentos\ReactProyectos\Kalitan\src\components\HowItWorks\HowItWorks.jsx", "JavaScript JSX", 0, 24, 0, 0, 0, 4, 28
+"c:\Users\eleaz\Documentos\ReactProyectos\Kalitan\src\components\ImpactSection\ImpactSection.css", "PostCSS", 0, 0, 37, 0, 0, 8, 45
+"c:\Users\eleaz\Documentos\ReactProyectos\Kalitan\src\components\ImpactSection\ImpactSection.jsx", "JavaScript JSX", 0, 25, 0, 0, 0, 2, 27
+"c:\Users\eleaz\Documentos\ReactProyectos\Kalitan\src\components\Navbar\Navbar.css", "PostCSS", 0, 0, 93, 0, 0, 16, 109
+"c:\Users\eleaz\Documentos\ReactProyectos\Kalitan\src\components\Navbar\Navbar.jsx", "JavaScript JSX", 0, 29, 0, 0, 0, 4, 33
+"c:\Users\eleaz\Documentos\ReactProyectos\Kalitan\src\components\Plans\Plans.css", "PostCSS", 0, 0, 43, 0, 0, 8, 51
+"c:\Users\eleaz\Documentos\ReactProyectos\Kalitan\src\components\Plans\Plans.jsx", "JavaScript JSX", 0, 30, 0, 0, 0, 2, 32
+"c:\Users\eleaz\Documentos\ReactProyectos\Kalitan\src\components\layout\Navbar.jsx", "JavaScript JSX", 0, 13, 0, 0, 0, 2, 15
+"c:\Users\eleaz\Documentos\ReactProyectos\Kalitan\src\components\ui\Button.css", "PostCSS", 0, 0, 10, 0, 0, 1, 11
+"c:\Users\eleaz\Documentos\ReactProyectos\Kalitan\src\components\ui\Button.jsx", "JavaScript JSX", 0, 8, 0, 0, 0, 2, 10
+"c:\Users\eleaz\Documentos\ReactProyectos\Kalitan\src\components\ui\Card.jsx", "JavaScript JSX", 0, 7, 0, 0, 0, 1, 8
+"c:\Users\eleaz\Documentos\ReactProyectos\Kalitan\src\components\ui\Checkbox.jsx", "JavaScript JSX", 0, 8, 0, 0, 0, 1, 9
+"c:\Users\eleaz\Documentos\ReactProyectos\Kalitan\src\components\ui\InfoPanel.jsx", "JavaScript JSX", 0, 8, 0, 0, 0, 1, 9
+"c:\Users\eleaz\Documentos\ReactProyectos\Kalitan\src\components\ui\Input.css", "PostCSS", 0, 0, 4, 0, 0, 1, 5
+"c:\Users\eleaz\Documentos\ReactProyectos\Kalitan\src\components\ui\Input.jsx", "JavaScript JSX", 0, 9, 0, 0, 0, 2, 11
+"c:\Users\eleaz\Documentos\ReactProyectos\Kalitan\src\components\ui\RadioButton.jsx", "JavaScript JSX", 0, 12, 0, 0, 0, 1, 13
+"c:\Users\eleaz\Documentos\ReactProyectos\Kalitan\src\components\ui\Select.jsx", "JavaScript JSX", 0, 12, 0, 0, 0, 1, 13
+"c:\Users\eleaz\Documentos\ReactProyectos\Kalitan\src\components\ui\StepProgress.css", "PostCSS", 0, 0, 6, 0, 0, 1, 7
+"c:\Users\eleaz\Documentos\ReactProyectos\Kalitan\src\components\ui\StepProgress.jsx", "JavaScript JSX", 0, 19, 0, 0, 0, 2, 21
+"c:\Users\eleaz\Documentos\ReactProyectos\Kalitan\src\index.css", "PostCSS", 0, 0, 79, 0, 0, 13, 92
+"c:\Users\eleaz\Documentos\ReactProyectos\Kalitan\src\layouts\MainLayout.jsx", "JavaScript JSX", 0, 14, 0, 0, 0, 2, 16
+"c:\Users\eleaz\Documentos\ReactProyectos\Kalitan\src\main.jsx", "JavaScript JSX", 0, 9, 0, 0, 0, 2, 11
+"c:\Users\eleaz\Documentos\ReactProyectos\Kalitan\src\pages\BusinessAffiliationPage.jsx", "JavaScript JSX", 0, 190, 0, 0, 0, 25, 215
+"c:\Users\eleaz\Documentos\ReactProyectos\Kalitan\src\pages\LandingPage.css", "PostCSS", 0, 0, 40, 0, 0, 7, 47
+"c:\Users\eleaz\Documentos\ReactProyectos\Kalitan\src\pages\LandingPage.jsx", "JavaScript JSX", 0, 47, 0, 0, 0, 5, 52
+"c:\Users\eleaz\Documentos\ReactProyectos\Kalitan\src\pages\RegisterVolunteerPage.css", "PostCSS", 0, 0, 909, 0, 0, 153, 1062
+"c:\Users\eleaz\Documentos\ReactProyectos\Kalitan\src\pages\RegisterVolunteerPage.jsx", "JavaScript JSX", 0, 534, 0, 0, 0, 62, 596
+"c:\Users\eleaz\Documentos\ReactProyectos\Kalitan\src\routes\AppRoutes.jsx", "JavaScript JSX", 0, 18, 0, 0, 0, 2, 20
+"c:\Users\eleaz\Documentos\ReactProyectos\Kalitan\src\services\api.js", "JavaScript", 8, 0, 0, 0, 0, 3, 11
+"c:\Users\eleaz\Documentos\ReactProyectos\Kalitan\src\services\authService.js", "JavaScript", 7, 0, 0, 0, 0, 3, 10
+"c:\Users\eleaz\Documentos\ReactProyectos\Kalitan\src\services\businessService.js", "JavaScript", 9, 0, 0, 0, 0, 4, 13
+"c:\Users\eleaz\Documentos\ReactProyectos\Kalitan\src\services\surplusService.js", "JavaScript", 7, 0, 0, 0, 0, 3, 10
+"c:\Users\eleaz\Documentos\ReactProyectos\Kalitan\src\services\volunteerService.js", "JavaScript", 10, 0, 0, 0, 0, 5, 15
+"c:\Users\eleaz\Documentos\ReactProyectos\Kalitan\src\utils\content.js", "JavaScript", 76, 0, 0, 0, 0, 7, 83
+"Total", "-", 117, 1431, 2155, 2, 0, 584, 4289
