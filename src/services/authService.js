@@ -1,9 +1,13 @@
 import api from './api'
 
-export const login = async (credentials) => {
+export function login(credentials) {
   return api.post('/auth/login', credentials)
 }
 
-export const register = async (userData) => {
+export function register(userData) {
   return api.post('/auth/register', userData)
+}
+
+export function logout() {
+  return api.post('/auth/logout')
 }

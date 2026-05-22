@@ -1,0 +1,39 @@
+:root {
+  color-scheme: light;
+  --font-sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  --color-background: #f7faf6;
+  --color-background-strong: #eef6ee;
+  --color-surface: #ffffff;
+  --color-surface-muted: #f1f7f2;
+  --color-surface-raised: rgba(255, 255, 255, 0.86);
+  --color-primary: #0f8f58;
+  --color-primary-strong: #05603a;
+  --color-primary-soft: rgba(15, 143, 88, 0.12);
+  --color-secondary: #123c35;
+  --color-accent: #f3a21b;
+  --color-accent-soft: rgba(243, 162, 27, 0.16);
+  --color-text: #0c1f1a;
+  --color-text-muted: #5c6f68;
+  --color-border: rgba(18, 60, 53, 0.13);
+  --color-border-strong: rgba(18, 60, 53, 0.22);
+  --color-danger: #b42318;
+
+  --shadow-soft: 0 18px 45px rgba(18, 60, 53, 0.08);
+  --shadow-medium: 0 24px 70px rgba(18, 60, 53, 0.13);
+  --shadow-card: 0 16px 38px rgba(21, 38, 32, 0.08);
+  --background-line: rgba(18, 60, 53, 0.08);
+  --background-grid-opacity: 0.42;
+  --background-glow-opacity: 0.52;
+  --background-deco-opacity: 0.34;
+  --gradient-hero: radial-gradient(circle at 16% 12%, rgba(15, 143, 88, 0.16), transparent 28%),
+    radial-gradient(circle at 90% 8%, rgba(243, 162, 27, 0.14), transparent 26%),
+    linear-gradient(180deg, #fbfdf9 0%, #eff8f1 100%);
+
+  --container: min(1200px, calc(100% - 32px));
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --radius-xl: 30px;
+  --nav-height: 80px;
+}

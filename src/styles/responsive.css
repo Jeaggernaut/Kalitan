@@ -1,0 +1,31 @@
+@media (min-width: 1440px) {
+  :root {
+    --container: min(1280px, calc(100% - 64px));
+  }
+}
+
+@media (max-width: 1366px) {
+  :root {
+    --container: min(1160px, calc(100% - 32px));
+  }
+}
+
+@media (max-width: 920px) {
+  :root {
+    --nav-height: 72px;
+  }
+
+  .section {
+    padding-block: clamp(2.75rem, 6vw, 4rem);
+  }
+}
+
+@media (max-width: 640px) {
+  :root {
+    --container: min(100% - 24px, 1180px);
+  }
+
+  .section {
+    padding-block: 2.5rem;
+  }
+}

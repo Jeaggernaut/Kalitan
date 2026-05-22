@@ -1,12 +1,13 @@
 import api from './api'
 
-export const getBusinesses = async () => {
-  return api.get('/businesses')
+export function getBusinesses(params) {
+  return api.get('/businesses', { params })
 }
 
-export async function registerBusinessAffiliation(data) {
-  const response = await api.post('/businesses/affiliation', data)
-  return response.data
+export function createBusiness(payload) {
+  return api.post('/businesses', payload)
 }
 
-export default { getBusinesses, registerBusinessAffiliation }
+export function getBusinessImpact(businessId) {
+  return api.get(`/businesses/${businessId}/impact`)
+}

@@ -1,14 +1,13 @@
 import api from './api'
 
-const BASE = '/volunteers'
-
-export async function registerVolunteer(payload) {
-  const response = await api.post(`${BASE}/register`, payload)
-  return response.data
+export function getVolunteers(params) {
+  return api.get('/volunteers', { params })
 }
 
-export const getVolunteers = async () => {
-  return api.get(BASE)
+export function registerVolunteer(payload) {
+  return api.post('/volunteers/register', payload)
 }
 
-export default { registerVolunteer, getVolunteers }
+export function getVolunteerActivity(volunteerId) {
+  return api.get(`/volunteers/${volunteerId}/activity`)
+}

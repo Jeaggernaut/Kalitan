@@ -1,10 +1,12 @@
 import { Outlet } from 'react-router-dom'
-import Navbar from '../components/Navbar/Navbar'
-import Footer from '../components/Footer/Footer'
+import AnimatedBackground from '../components/background/AnimatedBackground'
+import Footer from '../components/layout/Footer'
+import Navbar from '../components/layout/Navbar'
 
 export default function MainLayout() {
   return (
     <div className="app-shell">
+      <AnimatedBackground />
       <Navbar />
       <main className="page-content">
         <Outlet />

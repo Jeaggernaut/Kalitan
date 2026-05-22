@@ -1,0 +1,30 @@
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --color-background: #08130f;
+  --color-background-strong: #101d18;
+  --color-surface: #111f1a;
+  --color-surface-muted: #172b24;
+  --color-surface-raised: rgba(17, 31, 26, 0.86);
+  --color-primary: #40d18b;
+  --color-primary-strong: #72e6a8;
+  --color-primary-soft: rgba(64, 209, 139, 0.14);
+  --color-secondary: #d8f5e7;
+  --color-accent: #ffc14a;
+  --color-accent-soft: rgba(255, 193, 74, 0.16);
+  --color-text: #edf8f1;
+  --color-text-muted: #a9beb4;
+  --color-border: rgba(216, 245, 231, 0.13);
+  --color-border-strong: rgba(216, 245, 231, 0.22);
+  --color-danger: #ff9b90;
+
+  --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.26);
+  --shadow-medium: 0 24px 70px rgba(0, 0, 0, 0.34);
+  --shadow-card: 0 16px 38px rgba(0, 0, 0, 0.2);
+  --background-line: rgba(216, 245, 231, 0.075);
+  --background-grid-opacity: 0.5;
+  --background-glow-opacity: 0.58;
+  --background-deco-opacity: 0.42;
+  --gradient-hero: radial-gradient(circle at 18% 10%, rgba(64, 209, 139, 0.18), transparent 28%),
+    radial-gradient(circle at 88% 8%, rgba(255, 193, 74, 0.13), transparent 26%),
+    linear-gradient(180deg, #07120e 0%, #101d18 100%);
+}

@@ -1,0 +1,117 @@
+.animated-background {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 12% 8%, color-mix(in srgb, var(--color-primary), transparent 78%), transparent 30%),
+    radial-gradient(circle at 86% 12%, color-mix(in srgb, var(--color-accent), transparent 86%), transparent 28%),
+    linear-gradient(180deg, var(--color-background) 0%, var(--color-background-strong) 100%);
+}
+
+.animated-background__grid {
+  position: absolute;
+  inset: 0;
+  opacity: var(--background-grid-opacity);
+  background-image:
+    linear-gradient(var(--background-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--background-line) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.8), transparent 82%);
+}
+
+.animated-background__glow {
+  position: absolute;
+  width: clamp(260px, 32vw, 520px);
+  aspect-ratio: 1.45;
+  border-radius: 42% 58% 48% 52%;
+  background: color-mix(in srgb, var(--color-primary), transparent 70%);
+  filter: blur(52px);
+  opacity: var(--background-glow-opacity);
+  animation: ambient-drift 18s ease-in-out infinite alternate;
+}
+
+.animated-background__glow--one {
+  top: 8%;
+  left: -8%;
+}
+
+.animated-background__glow--two {
+  top: 34%;
+  right: -10%;
+  background: color-mix(in srgb, var(--color-accent), transparent 78%);
+  animation-duration: 22s;
+  animation-delay: -5s;
+}
+
+.animated-background__glow--three {
+  left: 30%;
+  bottom: -16%;
+  width: clamp(280px, 38vw, 620px);
+  background: color-mix(in srgb, var(--color-secondary), transparent 72%);
+  animation-duration: 20s;
+  animation-delay: -9s;
+}
+
+.animated-background__leaf {
+  position: absolute;
+  width: 9px;
+  height: 18px;
+  border: 1px solid color-mix(in srgb, var(--color-primary), transparent 20%);
+  border-radius: 999px 999px 999px 2px;
+  opacity: var(--background-deco-opacity);
+  transform: rotate(38deg);
+  animation: leaf-float 16s ease-in-out infinite;
+}
+
+.animated-background__leaf--one {
+  top: 26%;
+  left: 8%;
+}
+
+.animated-background__leaf--two {
+  top: 58%;
+  right: 12%;
+  animation-duration: 19s;
+  animation-delay: -4s;
+}
+
+.animated-background__leaf--three {
+  right: 30%;
+  bottom: 14%;
+  animation-duration: 21s;
+  animation-delay: -8s;
+}
+
+@keyframes ambient-drift {
+  from {
+    transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+  }
+
+  to {
+    transform: translate3d(36px, -28px, 0) rotate(8deg) scale(1.08);
+  }
+}
+
+@keyframes leaf-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(38deg);
+  }
+
+  50% {
+    transform: translate3d(18px, -24px, 0) rotate(56deg);
+  }
+}
+
+@media (max-width: 720px) {
+  .animated-background__glow {
+    filter: blur(44px);
+    opacity: calc(var(--background-glow-opacity) * 0.68);
+  }
+
+  .animated-background__leaf {
+    display: none;
+  }
+}

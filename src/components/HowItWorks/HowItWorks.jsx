@@ -1,7 +1,7 @@
 import './HowItWorks.css'
 import { howItWorksSteps } from '../../utils/content'
 
-const stepIcons = ['⌂', '▰', '♧']
+const stepIcons = ['*', '*', '*']
 
 export default function HowItWorks() {
   return (

@@ -1,9 +1,9 @@
-import './Button.css';
+import './Button.css'
 
-export default function Button({ children, onClick, type = 'button', variant = 'primary', disabled }) {
+export default function Button({ children, variant = 'primary', className = '', ...props }) {
   return (
-    <button className={`kp-btn kp-btn--${variant}`} type={type} onClick={onClick} disabled={disabled}>
+    <button className={`ui-button ui-button--${variant} ${className}`.trim()} {...props}>
       {children}
     </button>
-  );
+  )
 }

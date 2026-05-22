@@ -1,8 +1,6 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import MainLayout from '../layouts/MainLayout'
-import BusinessAffiliationPage from '../pages/BusinessAffiliationPage'
 import LandingPage from '../pages/LandingPage'
-import RegisterVolunteerPage from '../pages/RegisterVolunteerPage'
 
 export default function AppRoutes() {
   return (
@@ -10,8 +8,7 @@ export default function AppRoutes() {
       <Routes>
         <Route path="/" element={<MainLayout />}>
           <Route index element={<LandingPage />} />
-          <Route path="afiliar-negocio" element={<BusinessAffiliationPage />} />
-          <Route path="register-volunteer" element={<RegisterVolunteerPage />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Route>
       </Routes>
     </BrowserRouter>

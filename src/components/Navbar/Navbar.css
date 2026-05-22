@@ -23,6 +23,12 @@
   display: flex;
   align-items: center;
   gap: 0.85rem;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  padding: 0;
+  text-align: left;
+  cursor: pointer;
 }
 
 .navbar__logo {
@@ -73,18 +79,42 @@
 }
 
 .navbar__actions .button {
-  min-width: 136px;
-  padding: 0.8rem 1.4rem;
-  background: #ffffff;
-  border: 1px solid #198754;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  min-width: 164px;
+  min-height: 48px;
+  padding: 0.78rem 1.25rem;
+  border: 1px solid rgba(15, 118, 110, 0.28);
+  background: linear-gradient(180deg, #ffffff 0%, #f7fbf9 100%);
   color: #0f5132;
-  box-shadow: none;
+  box-shadow: 0 10px 24px rgba(15, 118, 110, 0.08);
+  letter-spacing: 0;
 }
 
-.navbar__actions .button::before {
-  content: '○';
-  margin-right: 0.45rem;
-  color: #198754;
+.navbar__actions .button:hover,
+.navbar__actions .button:focus-visible {
+  background: #0f766e;
+  color: #ffffff;
+  box-shadow: 0 14px 28px rgba(15, 118, 110, 0.18);
+}
+
+.navbar__login-icon {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  background: rgba(15, 118, 110, 0.1);
+  color: currentColor;
+  font-size: 0.9rem;
+  line-height: 1;
+}
+
+.navbar__actions .button:hover .navbar__login-icon,
+.navbar__actions .button:focus-visible .navbar__login-icon {
+  background: rgba(255, 255, 255, 0.18);
 }
 
 @media (max-width: 1120px) {
