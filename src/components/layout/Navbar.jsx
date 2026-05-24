@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import logo from '../../assets/logos/kalitan-logo.png'
+import { getDashboardPathByRole } from '../../data/roles'
+import { useAuth } from '../../hooks/useAuth'
 import { navLinks } from '../../utils/landingContent'
 import Button from '../ui/Button'
 import ThemeToggle from '../ui/ThemeToggle'
@@ -8,6 +10,7 @@ import './Navbar.css'
 
 export default function Navbar() {
   const navigate = useNavigate()
+  const { isAuthenticated, user, logout } = useAuth()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('inicio')
 
@@ -76,6 +79,17 @@ export default function Navbar() {
     navigate(`/auth?mode=${mode}${typeParam}`)
   }
 
+  const navigateToDashboard = () => {
+    if (user) {
+      navigate(getDashboardPathByRole(user.role))
+    }
+  }
+
+  const handleLogout = async () => {
+    await logout()
+    navigate('/auth?mode=login')
+  }
+
   return (
     <header className="site-navbar">
       <div className="site-navbar__inner">
@@ -102,14 +116,27 @@ export default function Navbar() {
 
           <div className="site-navbar__mobile-actions">
             <ThemeToggle />
-            <Button variant="primary" onClick={() => navigateToAuth('register', 'business')}>Afiliar negocio</Button>
+            {isAuthenticated ? (
+              <Button variant="primary" onClick={navigateToDashboard}>Mi dashboard</Button>
+            ) : (
+              <Button variant="primary" onClick={() => navigateToAuth('register', 'business')}>Afiliar negocio</Button>
+            )}
           </div>
         </nav>
 
         <div className="site-navbar__actions">
           <ThemeToggle />
-          <Button variant="secondary" onClick={() => navigateToAuth('login')}>Iniciar sesión</Button>
-          <Button variant="primary" onClick={() => navigateToAuth('register', 'business')}>Afiliar negocio</Button>
+          {isAuthenticated ? (
+            <>
+              <Button variant="secondary" onClick={navigateToDashboard}>Mi dashboard</Button>
+              <Button variant="primary" onClick={handleLogout}>Salir</Button>
+            </>
+          ) : (
+            <>
+              <Button variant="secondary" onClick={() => navigateToAuth('login')}>Iniciar sesión</Button>
+              <Button variant="primary" onClick={() => navigateToAuth('register', 'business')}>Afiliar negocio</Button>
+            </>
+          )}
         </div>
 
         <button

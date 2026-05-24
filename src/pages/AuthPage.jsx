@@ -2,6 +2,8 @@ import { useEffect, useMemo } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import AuthForm from '../components/Auth/AuthForm'
 import AuthIllustration from '../components/Auth/AuthIllustration'
+import { getDashboardPathByRole } from '../data/roles'
+import { useAuth } from '../hooks/useAuth'
 import '../components/Auth/Auth.css'
 
 const validModes = ['login', 'register']
@@ -9,6 +11,7 @@ const validModes = ['login', 'register']
 export default function AuthPage() {
   const [searchParams] = useSearchParams()
   const navigate = useNavigate()
+  const { isAuthenticated, user } = useAuth()
 
   const mode = useMemo(() => {
     const requestedMode = searchParams.get('mode') ?? 'login'
@@ -22,6 +25,12 @@ export default function AuthPage() {
       ? 'Registrarse | Kalitán'
       : 'Iniciar sesión | Kalitán'
   }, [mode])
+
+  useEffect(() => {
+    if (isAuthenticated && user) {
+      navigate(getDashboardPathByRole(user.role), { replace: true })
+    }
+  }, [isAuthenticated, navigate, user])
 
   const handleModeChange = (nextMode) => {
     navigate(`/auth?mode=${nextMode}`)

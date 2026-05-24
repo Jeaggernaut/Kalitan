@@ -1,6 +1,8 @@
 import { useMemo, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { getDashboardPathByRole } from '../../data/roles'
+import { useAuth } from '../../hooks/useAuth'
 import Button from '../ui/Button'
-import { login, register } from '../../services/authService'
 
 const accountTypes = [
   { label: 'Negocio', value: 'BUSINESS' },
@@ -18,6 +20,8 @@ const initialForm = {
 }
 
 export default function AuthForm({ mode, initialType, onModeChange }) {
+  const navigate = useNavigate()
+  const auth = useAuth()
   const [formData, setFormData] = useState(() => ({
     ...initialForm,
     accountType: initialType === 'business' ? 'BUSINESS' : initialForm.accountType,
@@ -81,19 +85,21 @@ export default function AuthForm({ mode, initialType, onModeChange }) {
 
     try {
       if (isRegister) {
-        await register({
+        const session = await auth.register({
           fullName: formData.fullName.trim(),
           email: formData.email.trim(),
           password: formData.password,
           accountType: formData.accountType,
         })
         setFeedback({ type: 'success', message: `Cuenta ${selectedAccount?.label.toLowerCase()} creada correctamente.` })
+        navigate(getDashboardPathByRole(session.user.role), { replace: true })
       } else {
-        await login({
+        const session = await auth.login({
           email: formData.email.trim(),
           password: formData.password,
         })
         setFeedback({ type: 'success', message: 'Inicio de sesión correcto.' })
+        navigate(getDashboardPathByRole(session.user.role), { replace: true })
       }
     } catch (error) {
       setFeedback({
