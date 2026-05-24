@@ -20,28 +20,30 @@ export default function AppRoutes() {
         <Route path="/" element={<MainLayout />}>
           <Route index element={<LandingPage />} />
           <Route path="auth" element={<AuthPage />} />
+          <Route path="auth/login" element={<AuthPage />} />
+          <Route path="auth/register" element={<AuthPage />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Route>
 
         <Route element={<ProtectedRoute />}>
           <Route element={<RoleRoute allowedRoles={[ROLES.BUSINESS]} />}>
-            <Route path="/dashboard/business" element={<BusinessDashboard />} />
+            <Route path="/dashboard/business/*" element={<BusinessDashboard />} />
           </Route>
           <Route element={<RoleRoute allowedRoles={[ROLES.VOLUNTEER]} />}>
-            <Route path="/dashboard/volunteer" element={<VolunteerDashboard />} />
+            <Route path="/dashboard/volunteer/*" element={<VolunteerDashboard />} />
           </Route>
           <Route element={<RoleRoute allowedRoles={[ROLES.ASSOCIATION]} />}>
-            <Route path="/dashboard/association" element={<AssociationDashboard />} />
+            <Route path="/dashboard/association/*" element={<AssociationDashboard />} />
           </Route>
           <Route element={<RoleRoute allowedRoles={[ROLES.BENEFICIARY]} />}>
-            <Route path="/dashboard/beneficiary" element={<BeneficiaryDashboard />} />
+            <Route path="/dashboard/beneficiary/*" element={<BeneficiaryDashboard />} />
+          </Route>
+          <Route element={<RoleRoute allowedRoles={[ROLES.ADMIN]} />}>
+            <Route path="/dashboard/admin/*" element={<AdminDashboard />} />
           </Route>
 
           <Route path="/dashboard" element={<DashboardLayout />}>
             <Route index element={<DashboardIndexRedirect />} />
-            <Route element={<RoleRoute allowedRoles={[ROLES.ADMIN]} />}>
-              <Route path="admin" element={<AdminDashboard />} />
-            </Route>
           </Route>
         </Route>
       </Routes>

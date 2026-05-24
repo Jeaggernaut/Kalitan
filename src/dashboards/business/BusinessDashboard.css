@@ -105,7 +105,7 @@
   text-transform: uppercase;
 }
 
-.business-sidebar__group button {
+.business-sidebar__group a {
   display: flex;
   align-items: center;
   gap: 0.8rem;
@@ -117,21 +117,41 @@
   padding: 0.7rem 0.8rem;
   font-weight: 800;
   text-align: left;
+  text-decoration: none;
 }
 
-.business-sidebar__group button.is-active,
-.business-sidebar__group button:hover {
+.business-sidebar__group a.is-active,
+.business-sidebar__group a:hover {
   border-color: rgba(74, 222, 128, 0.22);
   background: linear-gradient(135deg, rgba(74, 222, 128, 0.2), rgba(74, 222, 128, 0.08));
 }
 
-.business-sidebar__plan {
+.business-sidebar__footer {
+  display: grid;
+  gap: 0.75rem;
   margin-top: auto;
+}
+
+.business-sidebar__plan {
   border: 1px solid var(--business-dashboard-border);
   border-radius: 18px;
   background: var(--business-dashboard-panel);
   box-shadow: var(--business-dashboard-shadow);
   padding: 1rem;
+}
+
+.business-sidebar__logout {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  width: 100%;
+  min-height: 44px;
+  border: 1px solid rgba(248, 113, 113, 0.34);
+  border-radius: 12px;
+  background: rgba(248, 113, 113, 0.1);
+  color: #fecaca;
+  font-weight: 900;
 }
 
 .business-sidebar__plan div {
@@ -289,6 +309,11 @@
   margin-top: clamp(1.25rem, 2vw, 2rem);
 }
 
+.business-dashboard__metrics--compact {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.9rem;
+}
+
 .business-metric-card,
 .business-section,
 .business-impact-banner,
@@ -309,6 +334,13 @@
   gap: 0.9rem;
   padding: 1.1rem;
   transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.business-dashboard__metrics--compact .business-metric-card {
+  min-height: 112px;
+  border-radius: 14px;
+  grid-template-columns: 46px 1fr;
+  padding: 1rem;
 }
 
 .business-metric-card::after {
@@ -339,6 +371,11 @@
   background: rgba(74, 222, 128, 0.16);
 }
 
+.business-dashboard__metrics--compact .business-metric-card__icon {
+  width: 44px;
+  height: 44px;
+}
+
 .business-metric-card p {
   margin: 0;
   color: var(--business-dashboard-text);
@@ -351,6 +388,10 @@
   color: var(--business-dashboard-text);
   font-size: clamp(1.8rem, 3vw, 2.4rem);
   line-height: 1;
+}
+
+.business-dashboard__metrics--compact .business-metric-card strong {
+  font-size: clamp(1.45rem, 2.3vw, 1.9rem);
 }
 
 .business-metric-card div span {
@@ -627,6 +668,576 @@
   margin-top: 0.3rem;
 }
 
+.business-page-header {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: clamp(1.25rem, 2vw, 2rem);
+}
+
+.business-page-header span,
+.business-summary-grid span,
+.business-modal__header span {
+  color: var(--business-dashboard-green-strong);
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.business-page-header h2 {
+  margin: 0.25rem 0 0;
+  color: var(--business-dashboard-text);
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+}
+
+.business-page-header p {
+  margin: 0.5rem 0 0;
+  color: var(--business-dashboard-muted);
+}
+
+.business-primary-action,
+.business-secondary-action,
+.business-row-actions button,
+.business-pagination button,
+.business-modal__actions button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 42px;
+  border: 1px solid var(--business-dashboard-border);
+  border-radius: 10px;
+  background: var(--business-dashboard-panel-strong);
+  color: var(--business-dashboard-text);
+  font-weight: 900;
+}
+
+.business-primary-action {
+  border-color: rgba(74, 222, 128, 0.52);
+  background: linear-gradient(135deg, rgba(74, 222, 128, 0.28), rgba(74, 222, 128, 0.1));
+  color: var(--business-dashboard-green-strong);
+  padding: 0 1rem;
+}
+
+.business-secondary-action {
+  margin-top: 1rem;
+  padding: 0 1rem;
+}
+
+.business-page-card,
+.business-chart-grid,
+.business-summary-grid,
+.business-card-grid,
+.business-trace-list {
+  margin-top: 1rem;
+}
+
+.business-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.business-toolbar label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.business-toolbar label,
+.business-toolbar input,
+.business-toolbar select,
+.business-modal input,
+.business-modal textarea,
+.business-modal select,
+.business-profile-form input,
+.business-profile-form textarea,
+.business-profile-form select {
+  min-height: 42px;
+  border: 1px solid var(--business-dashboard-border);
+  border-radius: 10px;
+  background: rgba(2, 12, 9, 0.24);
+  color: var(--business-dashboard-text);
+  padding: 0 0.8rem;
+}
+
+:root[data-theme='light'] .business-toolbar label,
+:root[data-theme='light'] .business-toolbar input,
+:root[data-theme='light'] .business-toolbar select,
+:root[data-theme='light'] .business-modal input,
+:root[data-theme='light'] .business-modal textarea,
+:root[data-theme='light'] .business-modal select,
+:root[data-theme='light'] .business-profile-form input,
+:root[data-theme='light'] .business-profile-form textarea,
+:root[data-theme='light'] .business-profile-form select {
+  background: rgba(255, 255, 255, 0.74);
+}
+
+.business-toolbar label input {
+  border: 0;
+  background: transparent;
+  padding: 0;
+  outline: 0;
+}
+
+.business-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.business-surplus-card,
+.business-request-card {
+  border: 1px solid var(--business-dashboard-border);
+  border-radius: 16px;
+  background: var(--business-dashboard-panel);
+  box-shadow: var(--business-dashboard-shadow);
+  overflow: hidden;
+}
+
+.business-surplus-card img {
+  width: 100%;
+  height: 170px;
+  object-fit: cover;
+}
+
+.business-surplus-card > div,
+.business-request-card {
+  padding: 1rem;
+}
+
+.business-surplus-card h3,
+.business-request-card h3,
+.business-vertical-timeline h3 {
+  margin: 0.65rem 0 0;
+  color: var(--business-dashboard-text);
+}
+
+.business-surplus-card p,
+.business-request-card p,
+.business-vertical-timeline p {
+  color: var(--business-dashboard-muted);
+}
+
+.business-row-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.business-row-actions button {
+  min-width: 42px;
+  padding: 0 0.75rem;
+}
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  width: max-content;
+  border-radius: 999px;
+  padding: 0.28rem 0.6rem;
+  font-size: 0.76rem;
+  font-weight: 900;
+}
+
+.is-publicado,
+.is-activo,
+.is-completado,
+.is-entregada,
+.is-aceptada {
+  background: rgba(34, 197, 94, 0.16);
+  color: var(--business-dashboard-green-strong);
+}
+
+.is-en-proceso,
+.is-en-traslado,
+.is-programada,
+.is-pendiente {
+  background: rgba(234, 179, 8, 0.16);
+  color: #facc15;
+}
+
+.is-rescatado {
+  background: rgba(14, 165, 233, 0.16);
+  color: #7dd3fc;
+}
+
+.is-pausado,
+.is-rechazada {
+  background: rgba(248, 113, 113, 0.16);
+  color: #fecaca;
+}
+
+.business-empty {
+  display: grid;
+  place-items: center;
+  min-height: 190px;
+  border: 1px dashed var(--business-dashboard-border);
+  border-radius: 16px;
+  color: var(--business-dashboard-muted);
+  text-align: center;
+  padding: 1.5rem;
+}
+
+.business-empty strong {
+  color: var(--business-dashboard-text);
+  font-size: 1.1rem;
+}
+
+.business-pagination {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  align-items: center;
+  margin-top: 1rem;
+  color: var(--business-dashboard-muted);
+}
+
+.business-pagination button:disabled {
+  opacity: 0.45;
+}
+
+.business-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  background: rgba(0, 0, 0, 0.56);
+  padding: 1rem;
+}
+
+.business-modal {
+  width: min(620px, 100%);
+  max-height: 92vh;
+  overflow: auto;
+  border: 1px solid var(--business-dashboard-border);
+  border-radius: 18px;
+  background: var(--business-dashboard-tooltip);
+  box-shadow: var(--business-dashboard-shadow);
+  padding: 1.25rem;
+}
+
+.business-modal__header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.business-modal h3 {
+  margin: 0.2rem 0 0;
+}
+
+.business-modal label,
+.business-profile-form label {
+  display: grid;
+  gap: 0.45rem;
+  color: var(--business-dashboard-muted);
+  font-weight: 800;
+  margin-top: 0.75rem;
+}
+
+.business-modal textarea,
+.business-profile-form textarea {
+  min-height: 92px;
+  padding-top: 0.75rem;
+  resize: vertical;
+}
+
+.business-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.8rem;
+}
+
+.business-modal__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.business-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 1rem;
+}
+
+.business-summary-grid article {
+  min-height: 116px;
+}
+
+.business-summary-grid strong {
+  display: block;
+  margin-top: 0.55rem;
+  font-size: 2rem;
+}
+
+.business-table-wrap {
+  overflow-x: auto;
+}
+
+.business-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.business-table th,
+.business-table td {
+  border-bottom: 1px solid var(--business-dashboard-border);
+  padding: 0.9rem 0.75rem;
+  color: var(--business-dashboard-text);
+  text-align: left;
+  vertical-align: middle;
+}
+
+.business-table th {
+  color: var(--business-dashboard-muted);
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.business-trace-list,
+.business-chart-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.business-chart-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.business-chart-card h2 {
+  margin: 0 0 1rem;
+}
+
+.business-vertical-timeline {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.business-vertical-timeline article {
+  display: grid;
+  grid-template-columns: 120px minmax(0, 1fr);
+  gap: 1rem;
+  border-left: 2px solid var(--business-dashboard-border);
+  padding-left: 1rem;
+}
+
+.business-subscription-detail strong {
+  display: block;
+  margin-top: 1rem;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+}
+
+.business-subscription-detail small {
+  margin-left: 0.5rem;
+  font-size: 1rem;
+}
+
+.business-benefits {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin: 1rem 0;
+}
+
+.business-benefits span {
+  border: 1px solid var(--business-dashboard-border);
+  border-radius: 999px;
+  color: var(--business-dashboard-muted);
+  padding: 0.45rem 0.7rem;
+}
+
+.business-profile-form {
+  display: grid;
+  gap: 0.35rem;
+  margin-top: 1rem;
+}
+
+.business-profile-preview {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.business-profile-preview img {
+  width: 88px;
+  height: 88px;
+  border-radius: 18px;
+  object-fit: cover;
+}
+
+.business-profile-preview button {
+  display: inline-flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.business-toast {
+  position: fixed;
+  right: 1.2rem;
+  bottom: 1.2rem;
+  z-index: 120;
+  border: 1px solid rgba(74, 222, 128, 0.4);
+  border-radius: 14px;
+  background: var(--business-dashboard-tooltip);
+  color: var(--business-dashboard-green-strong);
+  box-shadow: var(--business-dashboard-shadow);
+  padding: 0.9rem 1rem;
+  font-weight: 900;
+}
+
+.business-home-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 380px);
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.business-home-grid__main,
+.business-home-grid__side {
+  display: grid;
+  align-content: start;
+  gap: 1rem;
+}
+
+.business-focus-panel {
+  border-color: rgba(74, 222, 128, 0.28);
+}
+
+.business-active-surpluses,
+.business-donation-feed,
+.business-activity-card {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.business-active-surpluses article {
+  display: grid;
+  grid-template-columns: 58px minmax(0, 1fr);
+  gap: 0.85rem;
+  align-items: center;
+  border-top: 1px solid var(--business-dashboard-border);
+  padding-top: 0.75rem;
+}
+
+.business-active-surpluses article:first-child,
+.business-donation-feed article:first-of-type {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.business-active-surpluses img {
+  width: 58px;
+  height: 58px;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.business-active-surpluses h3,
+.business-active-surpluses p {
+  margin: 0.35rem 0 0;
+}
+
+.business-chart--clean {
+  height: 280px;
+}
+
+.business-donation-feed article {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 0.85rem;
+  align-items: center;
+  border-top: 1px solid var(--business-dashboard-border);
+  padding-top: 0.75rem;
+}
+
+.business-donation-feed strong {
+  color: var(--business-dashboard-text);
+}
+
+.business-donation-feed p,
+.business-donation-feed small,
+.business-activity-card p {
+  margin: 0.25rem 0 0;
+  color: var(--business-dashboard-muted);
+}
+
+.business-subscription-mini h2 {
+  margin: 0.8rem 0 0;
+}
+
+.business-subscription-mini strong {
+  display: block;
+  margin-top: 0.7rem;
+  font-size: 2.15rem;
+}
+
+.business-subscription-mini small {
+  margin-left: 0.35rem;
+  font-size: 0.9rem;
+}
+
+.business-activity-card p {
+  border-left: 2px solid var(--business-dashboard-border);
+  padding-left: 0.85rem;
+}
+
+.business-toolbar--standalone {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.business-chart-grid--simple {
+  grid-template-columns: minmax(0, 1.1fr) minmax(260px, 0.9fr);
+}
+
+.business-chart-grid--simple .business-chart-card:last-child {
+  grid-column: 1 / -1;
+}
+
+.business-inline-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 36px;
+  border: 1px solid var(--business-dashboard-border);
+  border-radius: 9px;
+  background: var(--business-dashboard-panel-strong);
+  color: var(--business-dashboard-text);
+  padding: 0 0.65rem;
+  font-weight: 900;
+}
+
+.business-profile-form--premium {
+  max-width: 980px;
+}
+
+.business-profile-preferences {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.8rem;
+  margin: 0.75rem 0;
+}
+
+.business-profile-preferences label {
+  border: 1px solid var(--business-dashboard-border);
+  border-radius: 12px;
+  background: rgba(74, 222, 128, 0.06);
+  padding: 0.85rem;
+}
+
+.business-profile-preferences label span {
+  color: var(--business-dashboard-text);
+}
+
 @media (max-width: 1200px) {
   .business-dashboard {
     grid-template-columns: 1fr;
@@ -689,6 +1300,16 @@
     grid-template-columns: 1fr;
   }
 
+  .business-chart-grid,
+  .business-home-grid,
+  .business-profile-preferences {
+    grid-template-columns: 1fr;
+  }
+
+  .business-chart-grid--simple .business-chart-card:last-child {
+    grid-column: auto;
+  }
+
   .business-timeline {
     grid-template-columns: 1fr;
   }
@@ -724,6 +1345,10 @@
     justify-content: center;
   }
 
+  .business-dashboard__metrics--compact {
+    grid-template-columns: 1fr;
+  }
+
   .business-chart {
     height: 260px;
   }
@@ -735,5 +1360,63 @@
   .business-surplus-list__meta {
     grid-column: 2;
     justify-items: start;
+  }
+
+  .business-page-header,
+  .business-profile-preview {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .business-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .business-table,
+  .business-table thead,
+  .business-table tbody,
+  .business-table th,
+  .business-table td,
+  .business-table tr {
+    display: block;
+  }
+
+  .business-table thead {
+    display: none;
+  }
+
+  .business-table tr {
+    border: 1px solid var(--business-dashboard-border);
+    border-radius: 14px;
+    margin-bottom: 0.75rem;
+    padding: 0.75rem;
+  }
+
+  .business-table td {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    border-bottom: 0;
+    padding: 0.45rem 0;
+  }
+
+  .business-table td::before {
+    content: attr(data-label);
+    color: var(--business-dashboard-muted);
+    font-weight: 900;
+  }
+
+  .business-vertical-timeline article {
+    grid-template-columns: 1fr;
+  }
+
+  .business-donation-feed article {
+    grid-template-columns: 1fr;
+  }
+
+  .business-modal__actions,
+  .business-pagination {
+    flex-direction: column;
+    align-items: stretch;
   }
 }

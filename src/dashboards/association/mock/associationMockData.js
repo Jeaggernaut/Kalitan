@@ -2,19 +2,14 @@ import {
   Bell,
   Box,
   CalendarDays,
-  CheckCircle2,
   Cloud,
-  FileBarChart,
-  Heart,
   Home,
   MapPin,
   PackageCheck,
   ReceiptText,
   Settings,
-  Store,
   Truck,
   UserRoundCog,
-  Users,
 } from 'lucide-react'
 
 export const associationProfile = {
@@ -22,30 +17,28 @@ export const associationProfile = {
   shortName: 'Manos Unidas',
   initials: 'AM',
   type: 'Asociación receptora',
-  rating: '4.8',
-  reviews: '56',
+  description: 'Recibimos alimentos rescatados y los distribuimos en comedores comunitarios de la zona centro.',
+  address: 'Calle Fresno 19, Col. Centro, Poza Rica, Veracruz',
+  hours: 'Lunes a sábado, 9:00 am - 7:00 pm',
+  contact: 'recepcion@manosunidas.org · +52 782 123 4400',
   location: [20.5333, -97.45],
+  logo: 'https://images.unsplash.com/photo-1559027615-cd4628902d4a?auto=format&fit=crop&w=420&q=80',
 }
 
 export const associationNavigation = [
-  { label: 'Inicio', icon: Home, active: true },
-  { label: 'Entregas pendientes', icon: Truck },
-  { label: 'Alimentos recibidos', icon: Box },
-  { label: 'Beneficiarios atendidos', icon: Users },
-  { label: 'Solicitudes', icon: ReceiptText },
-  { label: 'Historial de recepciones', icon: CalendarDays },
-  { label: 'Reportes', icon: FileBarChart },
-  { label: 'Mi impacto', icon: Heart },
-  { label: 'Perfil de la asociación', icon: UserRoundCog },
-  { label: 'Voluntarios', icon: Users },
-  { label: 'Configuración', icon: Settings },
+  { label: 'Inicio', icon: Home, path: '/dashboard/association/inicio' },
+  { label: 'Entregas pendientes', icon: Truck, path: '/dashboard/association/entregas-pendientes' },
+  { label: 'Alimentos recibidos', icon: Box, path: '/dashboard/association/alimentos-recibidos' },
+  { label: 'Solicitudes', icon: ReceiptText, path: '/dashboard/association/solicitudes' },
+  { label: 'Historial de recepciones', icon: CalendarDays, path: '/dashboard/association/historial' },
+  { label: 'Perfil de la asociación', icon: UserRoundCog, path: '/dashboard/association/perfil' },
+  { label: 'Configuración', icon: Settings, path: '/dashboard/association/configuracion' },
 ]
 
 export const associationMetrics = [
-  { label: 'Entregas este mes', value: '24', delta: '+26%', icon: PackageCheck, tone: 'green' },
-  { label: 'Alimentos recibidos', value: '1,248 kg', delta: '+18%', icon: Box, tone: 'yellow' },
-  { label: 'Beneficiarios atendidos', value: '856', delta: '+21%', icon: Users, tone: 'purple' },
-  { label: 'CO₂ evitado', value: '632 kg', delta: '+17%', icon: Cloud, tone: 'blue' },
+  { label: 'Entregas este mes', value: '24', delta: '+6 vs abril', icon: PackageCheck },
+  { label: 'Alimentos recibidos', value: '1,248 kg', delta: 'Promedio 52 kg/día', icon: Box },
+  { label: 'CO₂ evitado', value: '632 kg', delta: 'Estimado operativo', icon: Cloud },
 ]
 
 export const pendingDeliveries = [
@@ -53,80 +46,90 @@ export const pendingDeliveries = [
     id: 'delivery-1',
     business: 'Panadería Buen Sabor',
     food: 'Pan artesanal del día',
-    amount: '15 kg de pan',
-    dateTime: 'Hoy, 4:00 PM',
+    category: 'Panadería',
+    amount: '15 kg',
+    time: '4:00 PM',
+    date: 'Hoy',
     status: 'En camino',
+    driver: 'Juan Pérez',
     coordinates: [20.5362, -97.4488],
-    image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=220&q=80',
+    notes: 'Entrega directa al comedor principal.',
   },
   {
     id: 'delivery-2',
     business: 'Mercado San Martín',
     food: 'Frutas y verduras variadas',
-    amount: '22 kg de alimentos',
-    dateTime: 'Hoy, 5:30 PM',
+    category: 'Frutas y verduras',
+    amount: '22 kg',
+    time: '5:30 PM',
+    date: 'Hoy',
     status: 'En camino',
+    driver: 'María López',
     coordinates: [20.5288, -97.4568],
-    image: 'https://images.unsplash.com/photo-1610348725531-843dff563e2c?auto=format&fit=crop&w=220&q=80',
+    notes: 'Revisar cajas al recibir.',
   },
   {
     id: 'delivery-3',
     business: 'Restaurante Verde Vida',
     food: 'Comida preparada',
-    amount: '10 kg de comida',
-    dateTime: 'Mañana, 12:00 PM',
+    category: 'Preparados',
+    amount: '10 kg',
+    time: '12:00 PM',
+    date: 'Mañana',
     status: 'Programado',
+    driver: 'Pendiente',
     coordinates: [20.5414, -97.4395],
-    image: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=220&q=80',
+    notes: 'Requiere refrigeración al llegar.',
   },
   {
     id: 'delivery-4',
     business: 'Pastelería Dulce Momento',
     food: 'Repostería variada',
-    amount: '8 kg de repostería',
-    dateTime: 'Mañana, 2:30 PM',
+    category: 'Repostería',
+    amount: '8 kg',
+    time: '2:30 PM',
+    date: 'Mañana',
     status: 'Programado',
+    driver: 'Ana Torres',
     coordinates: [20.5246, -97.4448],
-    image: 'https://images.unsplash.com/photo-1517433367423-c7e5b0f35086?auto=format&fit=crop&w=220&q=80',
+    notes: 'Separar para merienda comunitaria.',
   },
 ]
 
-export const associationAgenda = [
-  { time: '4:00 PM', action: 'Recepción de Panadería Buen Sabor', place: '15 kg de pan', status: 'En camino', tone: 'green' },
-  { time: '5:30 PM', action: 'Recepción de Mercado San Martín', place: '22 kg de alimentos', status: 'En camino', tone: 'green' },
-  { time: '12:00 PM', action: 'Recepción de Restaurante Verde Vida', place: '10 kg de comida', status: 'Programado', tone: 'blue' },
-  { time: '2:30 PM', action: 'Recepción de Pastelería Dulce Momento', place: '8 kg de repostería', status: 'Programado', tone: 'blue' },
+export const associationAgenda = pendingDeliveries.map((delivery) => ({
+  id: `agenda-${delivery.id}`,
+  time: delivery.time,
+  business: delivery.business,
+  status: delivery.status,
+  foodType: delivery.category,
+}))
+
+export const receivedFoods = [
+  { id: 'food-1', category: 'Panadería', amount: '180 kg', date: 'Mayo 2026', lastReception: 'Pan artesanal · 22 mayo' },
+  { id: 'food-2', category: 'Frutas y verduras', amount: '340 kg', date: 'Mayo 2026', lastReception: 'Cajas mixtas · 21 mayo' },
+  { id: 'food-3', category: 'Preparados', amount: '96 kg', date: 'Mayo 2026', lastReception: 'Comida lista · 20 mayo' },
+  { id: 'food-4', category: 'Repostería', amount: '64 kg', date: 'Mayo 2026', lastReception: 'Pan dulce · 19 mayo' },
 ]
 
-export const receivedFoodData = [
-  { month: 'Dic', kg: 420 },
-  { month: 'Ene', kg: 540 },
-  { month: 'Feb', kg: 760 },
-  { month: 'Mar', kg: 920 },
-  { month: 'Abr', kg: 1060 },
-  { month: 'May', kg: 1248 },
+export const receptionHistory = [
+  { id: 'rec-1', food: 'Pan artesanal del día', business: 'Panadería Buen Sabor', deliveredBy: 'Juan Pérez', time: 'Hoy, 10:25 AM', status: 'Recibido', amount: '15 kg' },
+  { id: 'rec-2', food: 'Frutas y verduras variadas', business: 'Mercado San Martín', deliveredBy: 'María López', time: 'Ayer, 6:10 PM', status: 'Recibido', amount: '22 kg' },
+  { id: 'rec-3', food: 'Comida preparada', business: 'Restaurante Verde Vida', deliveredBy: 'Diego Ruiz', time: '20 mayo, 1:20 PM', status: 'Validado', amount: '10 kg' },
+  { id: 'rec-4', food: 'Repostería variada', business: 'Pastelería Dulce Momento', deliveredBy: 'Ana Torres', time: '19 mayo, 4:40 PM', status: 'Recibido', amount: '8 kg' },
 ]
 
-export const foodDistributionData = [
-  { name: 'Panadería', value: 523, percent: '42%' },
-  { name: 'Frutas y verduras', value: 348, percent: '28%' },
-  { name: 'Comida preparada', value: 249, percent: '20%' },
-  { name: 'Repostería', value: 128, percent: '10%' },
+export const associationRequests = [
+  { id: 'req-1', title: 'Pan para comedor vespertino', category: 'Panadería', quantity: '20 kg', status: 'Abierta', window: 'Hoy, 6:00 PM' },
+  { id: 'req-2', title: 'Fruta para desayunos', category: 'Frutas', quantity: '30 kg', status: 'En revisión', window: 'Mañana, 8:00 AM' },
+  { id: 'req-3', title: 'Preparados refrigerados', category: 'Preparados', quantity: '12 kg', status: 'Completada', window: '20 mayo' },
 ]
 
-export const receptionTimeline = [
-  { title: 'Donación publicada', description: 'Pan artesanal del día', time: '08:30 am', icon: Store, active: true },
-  { title: 'Voluntario asignado', description: 'Juan Pérez', time: '09:15 am', icon: Users, active: true },
-  { title: 'En ruta', description: 'Entrega en camino', time: '09:45 am', icon: Truck, active: true },
-  { title: 'Recepción completada', description: 'Validación pendiente', time: '10:20 am', icon: CheckCircle2, active: false },
+export const recentActivity = [
+  'Juan Pérez confirmó entrega de Panadería Buen Sabor.',
+  'Mercado San Martín actualizó cantidad a 22 kg.',
+  'Recepción de Restaurante Verde Vida fue validada.',
+  'Nueva solicitud creada para fruta de desayuno.',
 ]
-
-export const associationImpact = {
-  people: 856,
-  foodKg: 1248,
-  co2Kg: 632,
-  donations: 24,
-}
 
 export const topbarIcons = {
   notification: Bell,

@@ -1,8 +1,13 @@
-import { Bell, ChevronDown, Menu, Plus } from 'lucide-react'
+import { Bell, Menu, Plus } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
+import BusinessSwitcher from '../../../components/business/BusinessSwitcher'
 import ThemeToggle from '../../../components/ui/ThemeToggle'
-import { businessProfile } from '../mock/businessMockData'
+import { useBusiness } from '../../../hooks/useBusiness'
 
 export default function BusinessTopbar({ onMenuClick }) {
+  const { activeBusiness } = useBusiness()
+  const navigate = useNavigate()
+
   return (
     <header className="business-topbar">
       <button className="business-topbar__menu" type="button" aria-label="Abrir menú" onClick={onMenuClick}>
@@ -11,12 +16,12 @@ export default function BusinessTopbar({ onMenuClick }) {
 
       <div className="business-topbar__title">
         <span>¡Bienvenido!</span>
-        <h1>{businessProfile.name}</h1>
+        <h1>{activeBusiness.profile.name}</h1>
         <p>Transformas excedentes en impacto real.</p>
       </div>
 
       <div className="business-topbar__actions">
-        <button className="business-topbar__publish" type="button">
+        <button className="business-topbar__publish" type="button" onClick={() => navigate('/dashboard/business/excedentes')}>
           Publicar excedente
           <Plus size={18} />
         </button>
@@ -25,14 +30,7 @@ export default function BusinessTopbar({ onMenuClick }) {
           <Bell size={21} />
           <span>3</span>
         </button>
-        <button className="business-topbar__profile" type="button">
-          <span>{businessProfile.initials}</span>
-          <div>
-            <strong>{businessProfile.name}</strong>
-            <small>{businessProfile.type}</small>
-          </div>
-          <ChevronDown size={18} />
-        </button>
+        <BusinessSwitcher />
       </div>
     </header>
   )

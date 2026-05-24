@@ -1,6 +1,11 @@
-import { subscription } from '../mock/businessMockData'
+import { useNavigate } from 'react-router-dom'
+import { useBusiness } from '../../../hooks/useBusiness'
 
 export default function SubscriptionCard() {
+  const { activeBusiness } = useBusiness()
+  const navigate = useNavigate()
+  const { subscription } = activeBusiness
+
   return (
     <article className="business-subscription-card">
       <div>
@@ -13,7 +18,7 @@ export default function SubscriptionCard() {
         <small>{subscription.period}</small>
       </strong>
       <p>Próximo pago: {subscription.nextPayment}</p>
-      <button type="button">Gestionar suscripción</button>
+      <button type="button" onClick={() => navigate('/dashboard/business/suscripcion')}>Gestionar suscripción</button>
     </article>
   )
 }

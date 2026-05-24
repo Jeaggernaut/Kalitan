@@ -19,12 +19,14 @@ function createMarkerIcon(status) {
   })
 }
 
-export default function DonationMap() {
+export default function DonationMap({ deliveries = pendingDeliveries }) {
   return (
     <section className="association-panel association-map-card">
       <div className="association-panel__header">
-        <h2>Donaciones recientes en el mapa</h2>
-        <button type="button">Ver mapa completo →</button>
+        <div>
+          <h2>Mapa simple</h2>
+          <p>Entregas en camino, programadas y ubicación de recepción.</p>
+        </div>
       </div>
       <div className="association-map">
         <MapContainer
@@ -46,7 +48,7 @@ export default function DonationMap() {
               Ubicación de recepción
             </Popup>
           </Marker>
-          {pendingDeliveries.map((delivery) => (
+          {deliveries.map((delivery) => (
             <Marker key={delivery.id} position={delivery.coordinates} icon={createMarkerIcon(delivery.status)}>
               <Popup>
                 <strong>{delivery.business}</strong>
@@ -62,10 +64,9 @@ export default function DonationMap() {
         </MapContainer>
       </div>
       <div className="association-map-legend">
-        <span><i style={{ background: statusColor['En camino'] }} /> Entregas en camino</span>
+        <span><i style={{ background: statusColor['En camino'] }} /> En camino</span>
         <span><i style={{ background: statusColor.Asociación }} /> Nuestra ubicación</span>
         <span><i style={{ background: statusColor.Programado }} /> Programado</span>
-        <span><i style={{ background: statusColor.Recibido }} /> Recibido</span>
       </div>
     </section>
   )

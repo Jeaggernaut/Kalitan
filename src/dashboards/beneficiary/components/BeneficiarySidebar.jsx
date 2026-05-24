@@ -1,17 +1,8 @@
 import { LogOut, Sprout, X } from 'lucide-react'
-import { useNavigate } from 'react-router-dom'
-import { useAuth } from '../../../hooks/useAuth'
-import { beneficiaryNavigation, beneficiaryProfile } from '../mock/beneficiaryMockData'
+import { NavLink } from 'react-router-dom'
+import { beneficiaryNavigation } from '../mock/beneficiaryMockData'
 
-export default function BeneficiarySidebar({ open, onClose }) {
-  const { logout } = useAuth()
-  const navigate = useNavigate()
-
-  const handleLogout = async () => {
-    await logout()
-    navigate('/auth?mode=login', { replace: true })
-  }
-
+export default function BeneficiarySidebar({ open, onClose, onLogout, profile }) {
   return (
     <>
       <button
@@ -24,8 +15,8 @@ export default function BeneficiarySidebar({ open, onClose }) {
         <div className="beneficiary-sidebar__brand">
           <span><Sprout size={30} /></span>
           <div>
-            <strong>Kalitan</strong>
-            <small>Economia circular</small>
+            <strong>Kalitán</strong>
+            <small>Economía circular</small>
           </div>
           <button className="beneficiary-sidebar__close" type="button" aria-label="Cerrar menu" onClick={onClose}>
             <X size={20} />
@@ -36,10 +27,10 @@ export default function BeneficiarySidebar({ open, onClose }) {
           {beneficiaryNavigation.map((item) => {
             const Icon = item.icon
             return (
-              <button className={item.active ? 'is-active' : ''} type="button" key={item.label}>
+              <NavLink key={item.path} to={`/dashboard/beneficiary/${item.path}`} onClick={onClose} className={({ isActive }) => (isActive ? 'is-active' : '')}>
                 <Icon size={20} />
                 {item.label}
-              </button>
+              </NavLink>
             )
           })}
         </nav>
@@ -55,16 +46,16 @@ export default function BeneficiarySidebar({ open, onClose }) {
         </div>
 
         <div className="beneficiary-sidebar__profile">
-          <span>{beneficiaryProfile.initials}</span>
+          <span>{profile.initials}</span>
           <div>
-            <strong>{beneficiaryProfile.name}</strong>
-            <small>{beneficiaryProfile.association}</small>
+            <strong>{profile.name}</strong>
+            <small>{profile.association}</small>
           </div>
         </div>
 
-        <button className="beneficiary-sidebar__logout" type="button" onClick={handleLogout}>
+        <button className="beneficiary-sidebar__logout" type="button" onClick={onLogout}>
           <LogOut size={18} />
-          Cerrar sesion
+          Cerrar sesión
         </button>
       </aside>
     </>

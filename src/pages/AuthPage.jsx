@@ -1,5 +1,5 @@
 import { useEffect, useMemo } from 'react'
-import { useNavigate, useSearchParams } from 'react-router-dom'
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 import AuthForm from '../components/Auth/AuthForm'
 import AuthIllustration from '../components/Auth/AuthIllustration'
 import { getDashboardPathByRole } from '../data/roles'
@@ -10,13 +10,15 @@ const validModes = ['login', 'register']
 
 export default function AuthPage() {
   const [searchParams] = useSearchParams()
+  const location = useLocation()
   const navigate = useNavigate()
   const { isAuthenticated, user } = useAuth()
 
   const mode = useMemo(() => {
-    const requestedMode = searchParams.get('mode') ?? 'login'
+    const pathMode = location.pathname.endsWith('/register') ? 'register' : 'login'
+    const requestedMode = searchParams.get('mode') ?? pathMode
     return validModes.includes(requestedMode) ? requestedMode : 'login'
-  }, [searchParams])
+  }, [location.pathname, searchParams])
 
   const initialType = searchParams.get('type') ?? ''
 

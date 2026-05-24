@@ -1,12 +1,12 @@
 import {
   associationAgenda,
-  associationImpact,
   associationMetrics,
   associationProfile,
-  foodDistributionData,
+  associationRequests,
   pendingDeliveries,
-  receivedFoodData,
-  receptionTimeline,
+  receivedFoods,
+  recentActivity,
+  receptionHistory,
 } from '../dashboards/association/mock/associationMockData'
 
 function mockResponse(data, delay = 250) {
@@ -21,10 +21,10 @@ export function getAssociationDashboard() {
     metrics: associationMetrics,
     deliveries: pendingDeliveries,
     agenda: associationAgenda,
-    impact: associationImpact,
-    receivedFoodData,
-    foodDistributionData,
-    timeline: receptionTimeline,
+    receivedFoods,
+    receptionHistory,
+    requests: associationRequests,
+    recentActivity,
   })
 }
 
@@ -40,9 +40,21 @@ export function getAssociationAgenda() {
   return mockResponse(associationAgenda)
 }
 
+export function getReceivedFoods() {
+  return mockResponse(receivedFoods)
+}
+
+export function getReceptionHistory() {
+  return mockResponse(receptionHistory)
+}
+
 export function getAssociationMap() {
   return mockResponse({
     association: associationProfile.location,
     deliveries: pendingDeliveries,
   })
+}
+
+export function updateAssociationProfile(payload) {
+  return mockResponse({ ...associationProfile, ...payload })
 }

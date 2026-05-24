@@ -1,0 +1,76 @@
+export const adminMockData = {
+  dashboard: {
+    metrics: [
+      { label: 'Negocios activos', value: '128', trend: '+12%', tone: 'green' },
+      { label: 'Asociaciones activas', value: '64', trend: '+8%', tone: 'violet' },
+      { label: 'Excedentes publicados', value: '356', trend: '+18%', tone: 'amber' },
+      { label: 'Usuarios registrados', value: '1,248', trend: '+22%', tone: 'blue' },
+    ],
+    growth: [
+      { date: '17 May', users: 920, businesses: 96, surpluses: 214 },
+      { date: '18 May', users: 1010, businesses: 103, surpluses: 238 },
+      { date: '19 May', users: 1084, businesses: 111, surpluses: 266 },
+      { date: '20 May', users: 1168, businesses: 116, surpluses: 292 },
+      { date: '21 May', users: 1210, businesses: 121, surpluses: 318 },
+      { date: '22 May', users: 1234, businesses: 126, surpluses: 344 },
+      { date: '23 May', users: 1248, businesses: 128, surpluses: 356 },
+    ],
+    activity: [
+      { id: 1, title: 'Nuevo negocio registrado', detail: 'Panaderia Buen Sabor se unio a la plataforma', time: 'Hoy, 10:45 AM', type: 'Negocio' },
+      { id: 2, title: 'Excedente publicado', detail: 'Super Alimentos MX publico 25 kg de frutas y verduras', time: 'Hoy, 09:30 AM', type: 'Excedente' },
+      { id: 3, title: 'Nueva asociacion registrada', detail: 'Asociacion Vida Nueva envio solicitud de verificacion', time: 'Ayer, 06:20 PM', type: 'Asociacion' },
+      { id: 4, title: 'Nuevo usuario registrado', detail: 'Juan Perez se registro como voluntario', time: 'Ayer, 04:10 PM', type: 'Usuario' },
+      { id: 5, title: 'Reporte recibido', detail: 'Alimentos Caducados reportados en SuperMercado del Norte', time: 'Ayer, 02:35 PM', type: 'Alerta' },
+    ],
+    quickActions: ['Revisar solicitudes', 'Ver excedentes vencidos', 'Exportar resumen'],
+  },
+  alerts: [
+    { id: 1, title: 'Excedentes por vencer', detail: '12 excedentes vencen en los proximos 3 dias', count: 12, severity: 'critical' },
+    { id: 2, title: 'Negocios inactivos', detail: '8 negocios sin actividad en los ultimos 14 dias', count: 8, severity: 'warning' },
+    { id: 3, title: 'Solicitudes pendientes', detail: '5 solicitudes de registro por revisar', count: 5, severity: 'info' },
+  ],
+  users: [
+    { id: 1, name: 'Ana Morales', email: 'ana@kalitan.mx', type: 'Beneficiario', status: 'Activo', registeredAt: '21/05/2026' },
+    { id: 2, name: 'Juan Perez', email: 'juan.perez@mail.com', type: 'Voluntario', status: 'Activo', registeredAt: '20/05/2026' },
+    { id: 3, name: 'Mariana Soto', email: 'mariana@vidasolidaria.org', type: 'Asociacion', status: 'Pendiente', registeredAt: '19/05/2026' },
+    { id: 4, name: 'Carlos Rivas', email: 'carlos@bistroverde.mx', type: 'Negocio', status: 'Suspendido', registeredAt: '18/05/2026' },
+    { id: 5, name: 'Lucia Herrera', email: 'lucia@mail.com', type: 'Voluntario', status: 'Activo', registeredAt: '17/05/2026' },
+    { id: 6, name: 'Diego Salas', email: 'diego@comedorcentral.org', type: 'Asociacion', status: 'Activo', registeredAt: '16/05/2026' },
+  ],
+  businesses: [
+    { id: 1, name: 'Panaderia Buen Sabor', owner: 'Rosa Martinez', status: 'Activo', subscription: 'Activa', activeSurpluses: 8, lastActivity: 'Hoy, 10:45 AM' },
+    { id: 2, name: 'Super Alimentos MX', owner: 'Roberto Cruz', status: 'Activo', subscription: 'Activa', activeSurpluses: 15, lastActivity: 'Hoy, 09:30 AM' },
+    { id: 3, name: 'Lacteos del Valle', owner: 'Elena Torres', status: 'Pendiente', subscription: 'Pendiente', activeSurpluses: 0, lastActivity: 'Ayer, 01:12 PM' },
+    { id: 4, name: 'Mercado del Norte', owner: 'Hector Diaz', status: 'Observacion', subscription: 'Activa', activeSurpluses: 3, lastActivity: 'Hace 3 dias' },
+  ],
+  associations: [
+    { id: 1, name: 'Asociacion Vida Nueva', contact: 'Mariana Soto', status: 'Pendiente', recentDeliveries: 0, lastActivity: 'Ayer, 06:20 PM' },
+    { id: 2, name: 'Comedor Central', contact: 'Diego Salas', status: 'Activo', recentDeliveries: 12, lastActivity: 'Hoy, 08:45 AM' },
+    { id: 3, name: 'Puente Comunitario', contact: 'Nora Luna', status: 'Activo', recentDeliveries: 7, lastActivity: 'Ayer, 11:15 AM' },
+    { id: 4, name: 'Casa Esperanza', contact: 'Sofia Merino', status: 'Suspendido', recentDeliveries: 2, lastActivity: 'Hace 6 dias' },
+  ],
+  surpluses: [
+    { id: 1, food: 'Pan artesanal', business: 'Panaderia Buen Sabor', quantity: '15 kg', status: 'Publicado', date: '24/05/2026' },
+    { id: 2, food: 'Frutas y verduras', business: 'Super Alimentos MX', quantity: '25 kg', status: 'En proceso', date: '24/05/2026' },
+    { id: 3, food: 'Productos lacteos', business: 'Lacteos del Valle', quantity: '20 kg', status: 'Vencido', date: '23/05/2026' },
+    { id: 4, food: 'Ensaladas preparadas', business: 'Bistro Verde', quantity: '8 kg', status: 'Rescatado', date: '22/05/2026' },
+    { id: 5, food: 'Despensa seca', business: 'Mercado del Norte', quantity: '18 kg', status: 'Publicado', date: '22/05/2026' },
+  ],
+  reports: {
+    summary: [
+      { label: 'Crecimiento usuarios', value: '+22%' },
+      { label: 'Crecimiento negocios', value: '+12%' },
+      { label: 'Actividad semanal', value: '486' },
+      { label: 'Excedentes publicados', value: '356' },
+    ],
+    weeklyActivity: [
+      { day: 'Lun', users: 42, businesses: 6, surpluses: 31 },
+      { day: 'Mar', users: 58, businesses: 8, surpluses: 46 },
+      { day: 'Mie', users: 64, businesses: 9, surpluses: 51 },
+      { day: 'Jue', users: 72, businesses: 11, surpluses: 64 },
+      { day: 'Vie', users: 83, businesses: 13, surpluses: 70 },
+      { day: 'Sab', users: 48, businesses: 7, surpluses: 49 },
+      { day: 'Dom', users: 36, businesses: 5, surpluses: 45 },
+    ],
+  },
+}

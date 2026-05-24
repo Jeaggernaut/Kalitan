@@ -1,60 +1,54 @@
-import { Headphones, Star } from 'lucide-react'
+import { Leaf, LogOut } from 'lucide-react'
+import { NavLink, useNavigate } from 'react-router-dom'
+import { useAuth } from '../../../hooks/useAuth'
 import { associationNavigation, associationProfile } from '../mock/associationMockData'
 
-const groups = [
-  { title: '', items: associationNavigation.slice(0, 1) },
-  { title: 'Gestión', items: associationNavigation.slice(1, 6) },
-  { title: 'Impacto', items: associationNavigation.slice(6, 8) },
-  { title: 'Asociación', items: associationNavigation.slice(8) },
-]
-
 export default function AssociationSidebar({ open, onClose }) {
+  const { logout } = useAuth()
+  const navigate = useNavigate()
+
+  const handleLogout = async () => {
+    await logout()
+    localStorage.clear()
+    navigate('/auth?mode=login', { replace: true })
+  }
+
   return (
     <>
       <button className={`association-sidebar-backdrop ${open ? 'is-open' : ''}`} type="button" aria-label="Cerrar menú" onClick={onClose} />
       <aside className={`association-sidebar ${open ? 'is-open' : ''}`}>
         <div className="association-sidebar__brand">
-          <span>♧</span>
+          <span><Leaf size={28} /></span>
           <div>
             <strong>Kalitán</strong>
-            <small>Economía circular</small>
+            <small>Asociación receptora</small>
           </div>
         </div>
 
         <nav className="association-sidebar__nav" aria-label="Dashboard asociación">
-          {groups.map((group) => (
-            <div className="association-sidebar__group" key={group.title || 'main'}>
-              {group.title && <p>{group.title}</p>}
-              {group.items.map((item) => {
-                const Icon = item.icon
-                return (
-                  <button className={item.active ? 'is-active' : ''} type="button" key={item.label}>
-                    <Icon size={19} />
-                    <span>{item.label}</span>
-                  </button>
-                )
-              })}
-            </div>
-          ))}
+          {associationNavigation.map((item) => {
+            const Icon = item.icon
+            return (
+              <NavLink className={({ isActive }) => (isActive ? 'is-active' : '')} to={item.path} key={item.label} onClick={onClose}>
+                <Icon size={18} />
+                <span>{item.label}</span>
+              </NavLink>
+            )
+          })}
         </nav>
 
-        <div className="association-sidebar__profile">
-          <div className="association-avatar">{associationProfile.initials}</div>
+        <div className="association-sidebar__mini-profile">
+          <img src={associationProfile.logo} alt="" />
           <div>
-            <strong>{associationProfile.name}</strong>
+            <strong>{associationProfile.shortName}</strong>
             <span>{associationProfile.type}</span>
-            <small><Star size={14} fill="currentColor" /> {associationProfile.rating} ({associationProfile.reviews})</small>
           </div>
-          <button type="button">Ver perfil</button>
         </div>
 
-        <div className="association-sidebar__help">
-          <Headphones size={20} />
-          <div>
-            <strong>¿Necesitas ayuda?</strong>
-            <span>Contáctanos</span>
-          </div>
-        </div>
+        <button className="association-sidebar__logout" type="button" onClick={handleLogout}>
+          <LogOut size={18} />
+          Cerrar sesión
+        </button>
       </aside>
     </>
   )

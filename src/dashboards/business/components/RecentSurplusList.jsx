@@ -1,5 +1,6 @@
+import { useNavigate } from 'react-router-dom'
+import { useBusiness } from '../../../hooks/useBusiness'
 import DashboardSection from './DashboardSection'
-import { recentSurplus } from '../mock/businessMockData'
 
 const statusClass = {
   Rescatado: 'is-rescued',
@@ -8,11 +9,15 @@ const statusClass = {
 }
 
 export default function RecentSurplusList() {
+  const { activeBusiness } = useBusiness()
+  const navigate = useNavigate()
+  const recentSurplus = activeBusiness.surpluses.slice(0, 4)
+
   return (
     <DashboardSection
       title="Excedentes recientes"
       className="business-recent"
-      action={<button className="business-chip" type="button">Ver todos</button>}
+      action={<button className="business-chip" type="button" onClick={() => navigate('/dashboard/business/excedentes')}>Ver todos</button>}
     >
       <div className="business-surplus-list">
         {recentSurplus.map((item) => (

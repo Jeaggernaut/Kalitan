@@ -1,0 +1,158 @@
+import { BarChart3, Leaf, PackageCheck } from 'lucide-react'
+import {
+  activity,
+  donations,
+  invoices,
+  metrics,
+  reports,
+  subscription,
+} from './businessMockData'
+
+const images = {
+  bread: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=420&q=80',
+  pastry: 'https://images.unsplash.com/photo-1517433367423-c7e5b0f35086?auto=format&fit=crop&w=420&q=80',
+  cake: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=420&q=80',
+  groceries: 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=420&q=80',
+}
+
+export const mockBusinesses = [
+  {
+    id: 'business-001',
+    profile: {
+      name: 'Panadería Buen Sabor',
+      type: 'Negocio',
+      initials: 'PB',
+      description: 'Panadería artesanal con producción diaria y excedentes listos para rescate social.',
+      address: 'Av. Reforma 125, Centro, CDMX',
+      phone: '+52 55 1234 9087',
+      hours: 'Lunes a sábado, 7:00 am - 8:00 pm',
+      logo: images.bread,
+      images: [images.bread, images.pastry],
+      preferences: { notifications: true, privacy: 'Solo asociaciones verificadas', theme: 'Sistema' },
+    },
+    metrics: [
+      { label: 'Excedentes publicados', value: '24', suffix: 'este mes', delta: '+20%', icon: Leaf },
+      { label: 'Rescates completados', value: '18', suffix: 'este mes', delta: '+12%', icon: PackageCheck },
+      { label: 'CO₂ evitado', value: '320 kg', suffix: 'este mes', delta: '+15%', icon: Leaf },
+    ],
+    impactData: [
+      { month: 'Dic', people: 370 },
+      { month: 'Ene', people: 570 },
+      { month: 'Feb', people: 620 },
+      { month: 'Mar', people: 780 },
+      { month: 'Abr', people: 900 },
+      { month: 'May', people: 1248 },
+    ],
+    surpluses: [
+      { id: 'sur-001', name: 'Pan artesanal del día', description: 'Piezas mixtas de masa madre y pan blanco.', amount: '15 kg', date: '2026-05-22', status: 'Rescatado', image: images.bread },
+      { id: 'sur-002', name: 'Conchas y cuernitos', description: 'Pan dulce de producción matutina.', amount: '8 kg', date: '2026-05-21', status: 'Publicado', image: images.pastry },
+      { id: 'sur-003', name: 'Pasteles individuales', description: 'Porciones refrigeradas listas para comedor.', amount: '12 unidades', date: '2026-05-20', status: 'En proceso', image: images.cake },
+    ],
+    reports,
+    analytics: metrics,
+    donations,
+    invoices,
+    subscription,
+    activity,
+  },
+  {
+    id: 'business-002',
+    profile: {
+      name: 'Café y Pasteles del Centro',
+      type: 'Negocio',
+      initials: 'CP',
+      description: 'Cafetería urbana con pastelería fresca, sándwiches y bebidas listas para rescate diario.',
+      address: 'Calle Madero 44, Centro, CDMX',
+      phone: '+52 55 9876 1122',
+      hours: 'Lunes a domingo, 8:00 am - 9:00 pm',
+      logo: images.cake,
+      images: [images.cake, images.pastry],
+      preferences: { notifications: true, privacy: 'Solo asociaciones verificadas', theme: 'Sistema' },
+    },
+    metrics: [
+      { label: 'Excedentes publicados', value: '31', suffix: 'este mes', delta: '+28%', icon: Leaf },
+      { label: 'Rescates completados', value: '25', suffix: 'este mes', delta: '+19%', icon: PackageCheck },
+      { label: 'CO₂ evitado', value: '410 kg', suffix: 'este mes', delta: '+22%', icon: BarChart3 },
+    ],
+    impactData: [
+      { month: 'Dic', people: 420 },
+      { month: 'Ene', people: 660 },
+      { month: 'Feb', people: 740 },
+      { month: 'Mar', people: 980 },
+      { month: 'Abr', people: 1210 },
+      { month: 'May', people: 1680 },
+    ],
+    surpluses: [
+      { id: 'sur-101', name: 'Rebanadas de pastel', description: 'Variedad de chocolate, vainilla y zanahoria.', amount: '28 piezas', date: '2026-05-22', status: 'Publicado', image: images.cake },
+      { id: 'sur-102', name: 'Sándwiches del día', description: 'Empacados individualmente, entrega antes de cierre.', amount: '18 piezas', date: '2026-05-21', status: 'En proceso', image: images.pastry },
+      { id: 'sur-103', name: 'Panqués y muffins', description: 'Lote mixto para desayuno comunitario.', amount: '9 kg', date: '2026-05-20', status: 'Rescatado', image: images.bread },
+    ],
+    reports: {
+      ...reports,
+      summary: [
+        { label: 'Alimentos rescatados', value: '560 kg' },
+        { label: 'CO₂ evitado', value: '410 kg' },
+        { label: 'Rescates mensuales', value: '25' },
+      ],
+    },
+    analytics: metrics,
+    donations: donations.map((item, index) => ({ ...item, id: `cafe-${item.id}`, food: index % 2 ? 'Sándwiches del día' : 'Rebanadas de pastel' })),
+    invoices,
+    subscription: { ...subscription, plan: 'Plan Pro', price: '$390', nextPayment: '18/06/2026', renewalDate: '2026-06-18' },
+    activity: activity.map((item) => item.replace('Bollería variada', 'Sándwiches del día')),
+  },
+  {
+    id: 'business-003',
+    profile: {
+      name: 'Super Alimentos MX',
+      type: 'Negocio',
+      initials: 'SA',
+      description: 'Tienda de alimentos con inventario fresco, abarrotes y perecederos próximos a rotación.',
+      address: 'Av. Universidad 870, Del Valle, CDMX',
+      phone: '+52 55 5555 4400',
+      hours: 'Lunes a domingo, 7:00 am - 11:00 pm',
+      logo: images.groceries,
+      images: [images.groceries, images.bread],
+      preferences: { notifications: true, privacy: 'Solo asociaciones verificadas', theme: 'Sistema' },
+    },
+    metrics: [
+      { label: 'Excedentes publicados', value: '46', suffix: 'este mes', delta: '+34%', icon: Leaf },
+      { label: 'Rescates completados', value: '39', suffix: 'este mes', delta: '+31%', icon: PackageCheck },
+      { label: 'CO₂ evitado', value: '780 kg', suffix: 'este mes', delta: '+29%', icon: BarChart3 },
+    ],
+    impactData: [
+      { month: 'Dic', people: 780 },
+      { month: 'Ene', people: 1050 },
+      { month: 'Feb', people: 1380 },
+      { month: 'Mar', people: 1840 },
+      { month: 'Abr', people: 2300 },
+      { month: 'May', people: 2940 },
+    ],
+    surpluses: [
+      { id: 'sur-201', name: 'Frutas de temporada', description: 'Cajas mixtas de plátano, manzana y cítricos.', amount: '80 kg', date: '2026-05-22', status: 'Publicado', image: images.groceries },
+      { id: 'sur-202', name: 'Verduras para cocina', description: 'Lote seleccionado para preparación el mismo día.', amount: '65 kg', date: '2026-05-21', status: 'En proceso', image: images.groceries },
+      { id: 'sur-203', name: 'Abarrotes sellados', description: 'Paquetes próximos a rotación, sin daño de empaque.', amount: '42 unidades', date: '2026-05-20', status: 'Rescatado', image: images.groceries },
+    ],
+    reports: {
+      ...reports,
+      summary: [
+        { label: 'Alimentos rescatados', value: '1.2 t' },
+        { label: 'CO₂ evitado', value: '780 kg' },
+        { label: 'Rescates mensuales', value: '39' },
+      ],
+    },
+    analytics: {
+      ...metrics,
+      topFoods: [
+        { name: 'Fruta', value: 34 },
+        { name: 'Verdura', value: 28 },
+        { name: 'Abarrotes', value: 24 },
+        { name: 'Pan', value: 14 },
+      ],
+    },
+    donations: donations.map((item, index) => ({ ...item, id: `super-${item.id}`, food: index % 2 ? 'Verduras para cocina' : 'Frutas de temporada' })),
+    invoices,
+    subscription: { ...subscription, plan: 'Plan Impacto', price: '$690', nextPayment: '30/06/2026', renewalDate: '2026-06-30' },
+    activity: activity.map((item) => item.replace('Bollería variada', 'Frutas de temporada')),
+  },
+]
