@@ -21,9 +21,9 @@ export default function BusinessTopbar({ onMenuClick }) {
       </div>
 
       <div className="business-topbar__actions">
-        <button className="business-topbar__publish" type="button" onClick={() => navigate('/dashboard/business/excedentes')}>
-          Publicar excedente
+        <button className="business-topbar__publish" type="button" onClick={() => navigate('/dashboard/business/excedentes/nuevo')}>
           <Plus size={18} />
+          Publicar excedente
         </button>
         <ThemeToggle />
         <button className="business-topbar__icon" type="button" aria-label="Notificaciones">

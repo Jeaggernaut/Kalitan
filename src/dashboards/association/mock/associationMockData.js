@@ -13,11 +13,11 @@ import {
 } from 'lucide-react'
 
 export const associationProfile = {
-  name: 'Asociación Manos Unidas',
-  shortName: 'Manos Unidas',
-  initials: 'AM',
+  name: 'Banco de Alimentos Poza Rica',
+  shortName: 'Alimentos Poza Rica',
+  initials: 'BA',
   type: 'Asociación receptora',
-  description: 'Recibimos alimentos rescatados y los distribuimos en comedores comunitarios de la zona centro.',
+  description: 'Recibimos alimentos rescatados y los distribuimos en comedores comunitarios de Poza Rica.',
   address: 'Calle Fresno 19, Col. Centro, Poza Rica, Veracruz',
   hours: 'Lunes a sábado, 9:00 am - 7:00 pm',
   contact: 'recepcion@manosunidas.org · +52 782 123 4400',
@@ -57,7 +57,7 @@ export const pendingDeliveries = [
   },
   {
     id: 'delivery-2',
-    business: 'Mercado San Martín',
+    business: 'Mercado Cazones',
     food: 'Frutas y verduras variadas',
     category: 'Frutas y verduras',
     amount: '22 kg',
@@ -113,7 +113,7 @@ export const receivedFoods = [
 
 export const receptionHistory = [
   { id: 'rec-1', food: 'Pan artesanal del día', business: 'Panadería Buen Sabor', deliveredBy: 'Juan Pérez', time: 'Hoy, 10:25 AM', status: 'Recibido', amount: '15 kg' },
-  { id: 'rec-2', food: 'Frutas y verduras variadas', business: 'Mercado San Martín', deliveredBy: 'María López', time: 'Ayer, 6:10 PM', status: 'Recibido', amount: '22 kg' },
+  { id: 'rec-2', food: 'Frutas y verduras variadas', business: 'Mercado Cazones', deliveredBy: 'María López', time: 'Ayer, 6:10 PM', status: 'Recibido', amount: '22 kg' },
   { id: 'rec-3', food: 'Comida preparada', business: 'Restaurante Verde Vida', deliveredBy: 'Diego Ruiz', time: '20 mayo, 1:20 PM', status: 'Validado', amount: '10 kg' },
   { id: 'rec-4', food: 'Repostería variada', business: 'Pastelería Dulce Momento', deliveredBy: 'Ana Torres', time: '19 mayo, 4:40 PM', status: 'Recibido', amount: '8 kg' },
 ]
@@ -126,7 +126,7 @@ export const associationRequests = [
 
 export const recentActivity = [
   'Juan Pérez confirmó entrega de Panadería Buen Sabor.',
-  'Mercado San Martín actualizó cantidad a 22 kg.',
+  'Mercado Cazones actualizó cantidad a 22 kg.',
   'Recepción de Restaurante Verde Vida fue validada.',
   'Nueva solicitud creada para fruta de desayuno.',
 ]

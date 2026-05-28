@@ -29,7 +29,7 @@ export default function BusinessConfirmationStep({
         <SummaryItem label="Responsable" value={data.contactLocation.responsibleName || 'Laura Martínez'} />
         <SummaryItem label="Correo" value={data.contactLocation.email || 'contacto@negocio.com'} />
         <SummaryItem label="Teléfono" value={data.contactLocation.phone || '33 1234 5678'} />
-        <SummaryItem label="Dirección" value={data.contactLocation.address || 'Zapopan, Jalisco'} />
+        <SummaryItem label="Dirección" value={data.contactLocation.address || 'Poza Rica, Veracruz'} />
       </Summary>
 
       <Summary title="Sobre tus excedentes" onEdit={() => onEdit(3)}>

@@ -3,9 +3,33 @@
   inset: 0 0 auto 0;
   z-index: 50;
   width: 100%;
-  background: #ffffff;
-  border-bottom: 1px solid rgba(15, 118, 110, 0.1);
-  box-shadow: 0 8px 24px rgba(15, 118, 110, 0.04);
+  background: rgba(247, 250, 246, 0.6);
+  border-bottom: 1px solid rgba(15, 118, 110, 0.06);
+  backdrop-filter: blur(0px) saturate(100%);
+  box-shadow: none;
+  transition:
+    background 0.38s ease,
+    backdrop-filter 0.38s ease,
+    border-color 0.38s ease,
+    box-shadow 0.38s ease;
+}
+
+:root[data-theme='dark'] .navbar {
+  background: rgba(8, 19, 15, 0.6);
+  border-bottom-color: rgba(216, 245, 231, 0.05);
+}
+
+.navbar--scrolled {
+  background: rgba(247, 250, 246, 0.88);
+  backdrop-filter: blur(20px) saturate(180%);
+  border-bottom-color: rgba(15, 118, 110, 0.11);
+  box-shadow: 0 4px 24px rgba(18, 60, 53, 0.06), 0 1px 0 rgba(15, 118, 110, 0.06);
+}
+
+:root[data-theme='dark'] .navbar--scrolled {
+  background: rgba(8, 19, 15, 0.9);
+  border-bottom-color: rgba(216, 245, 231, 0.08);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.32), 0 1px 0 rgba(216, 245, 231, 0.06);
 }
 
 .navbar__container {
@@ -29,6 +53,11 @@
   padding: 0;
   text-align: left;
   cursor: pointer;
+  transition: opacity 0.22s ease;
+}
+
+.navbar__brand:hover {
+  opacity: 0.82;
 }
 
 .navbar__logo {
@@ -38,19 +67,28 @@
   border-radius: 16px;
   padding: 0.7rem;
   background: rgba(15, 118, 110, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.navbar__brand:hover .navbar__logo {
+  transform: scale(1.06);
+  box-shadow: 0 6px 20px rgba(15, 118, 110, 0.2);
 }
 
 .navbar__brand-text strong {
   display: block;
   font-size: 1rem;
+  color: var(--color-text, #0c1f1a);
 }
 
 .navbar__brand-text p {
   margin: 0;
-  color: var(--text-muted);
+  color: var(--color-text-muted, #5c6f68);
   font-size: 0.82rem;
   line-height: 1.25;
 }
+
+/* ─── Nav links ──────────────────────────────────────────────────── */
 
 .navbar__links {
   display: flex;
@@ -60,18 +98,38 @@
   flex: 1;
 }
 
-.navbar__links a {
-  color: var(--text);
+.navbar__link {
+  position: relative;
+  color: var(--color-text, #0c1f1a);
   text-decoration: none;
   font-size: 0.95rem;
   font-weight: 500;
-  transition: color 0.2s ease;
+  padding-bottom: 3px;
+  transition: color 0.22s ease;
 }
 
-.navbar__links a:hover,
-.navbar__links a:focus-visible {
-  color: var(--primary);
+.navbar__link::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 50%;
+  width: 0%;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--color-primary, #0f8f58);
+  transform: translateX(-50%);
+  transition: width 0.26s ease;
 }
+
+.navbar__link:hover {
+  color: var(--color-primary, #0f8f58);
+}
+
+.navbar__link:hover::after {
+  width: 100%;
+}
+
+/* ─── CTA button ─────────────────────────────────────────────────── */
 
 .navbar__actions {
   display: flex;
@@ -86,18 +144,24 @@
   min-width: 164px;
   min-height: 48px;
   padding: 0.78rem 1.25rem;
-  border: 1px solid rgba(15, 118, 110, 0.28);
+  border: 1px solid rgba(15, 118, 110, 0.26);
   background: linear-gradient(180deg, #ffffff 0%, #f7fbf9 100%);
   color: #0f5132;
-  box-shadow: 0 10px 24px rgba(15, 118, 110, 0.08);
+  box-shadow: 0 8px 22px rgba(15, 118, 110, 0.09);
   letter-spacing: 0;
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.2s ease;
 }
 
 .navbar__actions .button:hover,
 .navbar__actions .button:focus-visible {
-  background: #0f766e;
+  background: #0f8f58;
   color: #ffffff;
-  box-shadow: 0 14px 28px rgba(15, 118, 110, 0.18);
+  box-shadow: 0 14px 32px rgba(15, 143, 88, 0.28);
+  transform: translateY(-2px);
 }
 
 .navbar__login-icon {
@@ -110,12 +174,40 @@
   color: currentColor;
   font-size: 0.9rem;
   line-height: 1;
+  transition: background 0.2s ease;
 }
 
 .navbar__actions .button:hover .navbar__login-icon,
 .navbar__actions .button:focus-visible .navbar__login-icon {
-  background: rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.2);
 }
+
+/* ─── Dark mode overrides ────────────────────────────────────────── */
+
+:root[data-theme='dark'] .navbar__link {
+  color: var(--color-text, #edf8f1);
+}
+
+:root[data-theme='dark'] .navbar__link:hover {
+  color: var(--color-primary, #40d18b);
+}
+
+:root[data-theme='dark'] .navbar__link::after {
+  background: var(--color-primary, #40d18b);
+}
+
+:root[data-theme='dark'] .navbar__actions .button {
+  background: rgba(17, 31, 26, 0.9);
+  border-color: rgba(64, 209, 139, 0.2);
+  color: var(--color-primary, #40d18b);
+}
+
+:root[data-theme='dark'] .navbar__actions .button:hover {
+  background: var(--color-primary, #40d18b);
+  color: #08130f;
+}
+
+/* ─── Responsive ─────────────────────────────────────────────────── */
 
 @media (max-width: 1120px) {
   .navbar__container {

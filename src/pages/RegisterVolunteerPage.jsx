@@ -277,7 +277,7 @@ function AvailabilityStep({ onBack }) {
 
           <label className="availability-section">
             <span className="availability-field-title">⌖ Zona donde puedes apoyar</span>
-            <input type="text" defaultValue="Zapopan, Jalisco" />
+            <input type="text" defaultValue="Poza Rica, Veracruz" />
           </label>
 
           <fieldset className="availability-section">
@@ -405,7 +405,7 @@ function ConfirmationStep({ onBack, onEdit }) {
             ['Correo electrónico:', 'juan.perez@email.com'],
             ['Teléfono:', '55 1234 5678'],
             ['Fecha de nacimiento:', '15/05/1995'],
-            ['Dirección:', 'Zapopan, Jalisco, México'],
+            ['Dirección:', 'Poza Rica, Veracruz, México'],
           ]}
         />
 
@@ -417,7 +417,7 @@ function ConfirmationStep({ onBack, onEdit }) {
             ['Días disponibles:', 'Lunes, Miércoles, Viernes, Sábado y Domingo'],
             ['Horario preferido:', 'Mañana (8:00 AM - 12:00 PM)\nTarde (12:00 PM - 6:00 PM)'],
             ['Frecuencia:', 'Dos o tres veces por semana'],
-            ['Zona donde puedes apoyar:', 'Zapopan, Jalisco'],
+            ['Zona donde puedes apoyar:', 'Poza Rica, Veracruz'],
             ['Transporte propio:', 'Sí'],
             ['Radio máximo de traslado:', '5 km'],
             ['Nota adicional:', 'Por las tardes entre semana tengo mayor disponibilidad.'],

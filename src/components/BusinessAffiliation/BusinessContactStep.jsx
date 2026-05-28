@@ -26,15 +26,15 @@ export default function BusinessContactStep({ data, errors, onChange, onBack, on
         </Field>
 
         <Field label="Ciudad *" error={errors['contactLocation.city']}>
-          <input value={data.city} onChange={(event) => onChange('city', event.target.value)} placeholder="Zapopan" />
+          <input value={data.city} onChange={(event) => onChange('city', event.target.value)} placeholder="Poza Rica" />
         </Field>
 
         <Field label="Estado *" error={errors['contactLocation.state']}>
-          <input value={data.state} onChange={(event) => onChange('state', event.target.value)} placeholder="Jalisco" />
+          <input value={data.state} onChange={(event) => onChange('state', event.target.value)} placeholder="Veracruz" />
         </Field>
 
         <Field label="Código postal *" error={errors['contactLocation.zipCode']}>
-          <input value={data.zipCode} onChange={(event) => onChange('zipCode', event.target.value)} placeholder="45100" />
+          <input value={data.zipCode} onChange={(event) => onChange('zipCode', event.target.value)} placeholder="93230" />
         </Field>
 
         <Field label="Referencias de ubicación" full>

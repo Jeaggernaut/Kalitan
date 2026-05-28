@@ -1,0 +1,119 @@
+/* ─── Kalitán — Motion utilities ────────────────────────────────── */
+/* GPU-friendly: only transform + opacity + filter.                  */
+/* All keyframes gated by prefers-reduced-motion: no-preference.     */
+
+@media (prefers-reduced-motion: no-preference) {
+
+  /* Shine sweep — triggered by parent :hover */
+  @keyframes shine-sweep {
+    from { transform: translateX(-100%) skewX(-20deg); }
+    to   { transform: translateX(220%)  skewX(-20deg); }
+  }
+
+  /* Gentle vertical float for images */
+  @keyframes subtle-float {
+    0%, 100% { transform: translate3d(0, 0,  0); }
+    50%       { transform: translate3d(0, -10px, 0); }
+  }
+
+  /* Breathing glow */
+  @keyframes glow-pulse {
+    from { opacity: 0.55; filter: blur(52px) scale(0.98); }
+    to   { opacity: 0.95; filter: blur(38px) scale(1.04); }
+  }
+
+  /* Gradient position shift — for CTA background */
+  @keyframes gradient-shift {
+    0%   { background-position: 0%   50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0%   50%; }
+  }
+
+  /* Number pop-in */
+  @keyframes number-pop {
+    0%   { opacity: 0; transform: scale(0.82) translateY(8px); }
+    70%  { transform: scale(1.04) translateY(-2px); }
+    100% { opacity: 1; transform: scale(1) translateY(0); }
+  }
+
+  /* Subtle border glow spin for featured card */
+  @keyframes border-glow-spin {
+    0%   { box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-primary), transparent 40%), 0 0 28px color-mix(in srgb, var(--color-primary), transparent 68%); }
+    50%  { box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-primary), transparent 20%), 0 0 44px color-mix(in srgb, var(--color-primary), transparent 52%); }
+    100% { box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-primary), transparent 40%), 0 0 28px color-mix(in srgb, var(--color-primary), transparent 68%); }
+  }
+
+}
+
+/* ─── Shine overlay ──────────────────────────────────────────────── */
+/* Apply .has-shine to any element to get the hover shine effect.    */
+
+.has-shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.has-shine::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 35%,
+    rgba(255, 255, 255, 0.28) 50%,
+    transparent 65%
+  );
+  transform: translateX(-100%) skewX(-20deg);
+  pointer-events: none;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .has-shine:hover::after {
+    animation: shine-sweep 0.52s ease forwards;
+  }
+}
+
+/* ─── Floating image ─────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: no-preference) {
+  .image-float {
+    animation: subtle-float 7s ease-in-out infinite;
+    will-change: transform;
+  }
+}
+
+/* ─── Glow wrapper ───────────────────────────────────────────────── */
+
+.image-glow-wrap {
+  position: relative;
+}
+
+.image-glow-wrap::before {
+  content: '';
+  position: absolute;
+  inset: -22%;
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--color-primary), transparent 60%),
+    transparent 68%
+  );
+  filter: blur(52px);
+  z-index: -1;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .image-glow-wrap::before {
+    animation: glow-pulse 4.5s ease-in-out infinite alternate;
+  }
+}
+
+/* ─── CTA animated gradient ──────────────────────────────────────── */
+
+@media (prefers-reduced-motion: no-preference) {
+  .cta-gradient-animated {
+    background-size: 220% 220%;
+    animation: gradient-shift 8s ease-in-out infinite;
+  }
+}

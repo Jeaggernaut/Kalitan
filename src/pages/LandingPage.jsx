@@ -1,3 +1,4 @@
+import '../styles/motions.css'
 import {
   BenefitsSection,
   FinalCtaSection,
@@ -12,24 +13,29 @@ import ScrollReveal from '../components/animations/ScrollReveal'
 export default function LandingPage() {
   return (
     <>
-      <ScrollReveal delay={0.05}>
-        <HeroSection />
-      </ScrollReveal>
+      {/* Hero animates on mount via internal motion.div (no ScrollReveal needed) */}
+      <HeroSection />
+
       <ScrollReveal>
         <HowItWorksSection />
       </ScrollReveal>
+
       <ScrollReveal>
         <BenefitsSection />
       </ScrollReveal>
+
       <ScrollReveal>
         <ImpactSection />
       </ScrollReveal>
+
       <ScrollReveal>
         <MetricsSection />
       </ScrollReveal>
+
       <ScrollReveal>
         <PlansSection />
       </ScrollReveal>
+
       <ScrollReveal>
         <FinalCtaSection />
       </ScrollReveal>

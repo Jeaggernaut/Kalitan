@@ -1,13 +1,31 @@
 import { motion } from 'framer-motion'
-import { Check, Download, FileDown, Pause, Pencil, Plus, Search, Trash2, Upload } from 'lucide-react'
+import {
+  AlertTriangle,
+  Check,
+  ChevronLeft,
+  ChevronRight,
+  CreditCard,
+  Download,
+  FileDown,
+  Leaf,
+  Pause,
+  Pencil,
+  Plus,
+  Search,
+  Star,
+  Trash2,
+  Upload,
+} from 'lucide-react'
 import { useState } from 'react'
-import { Navigate, Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes, useNavigate } from 'react-router-dom'
 import { Area, AreaChart, Bar, BarChart, CartesianGrid, Cell, Line, LineChart, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 import { BusinessProvider } from '../../context/BusinessContext.jsx'
 import { useBusiness } from '../../hooks/useBusiness'
 import BusinessSidebar from './components/BusinessSidebar'
 import BusinessTopbar from './components/BusinessTopbar'
 import MetricCard from './components/MetricCard'
+import { subscriptionPlans } from './mock/businessMockData'
+import PublishSurplusPage from './pages/PublishSurplusPage'
 import './BusinessDashboard.css'
 
 const itemVariants = {
@@ -16,7 +34,7 @@ const itemVariants = {
 }
 
 const statusClass = (status) => `status-pill is-${status.toLowerCase().replace(/\s/g, '-')}`
-const statusValues = ['Publicado', 'En proceso', 'Rescatado', 'Pausado', 'Entregada', 'En traslado', 'Programada', 'Pagada', 'Pendiente', 'Activo']
+const statusValues = ['Publicado', 'En proceso', 'Rescatado', 'Pausado', 'Expirado', 'Cancelado', 'Entregada', 'En traslado', 'Programada', 'Pagada', 'Pendiente', 'Activo']
 
 function Toast({ message }) {
   return message ? <div className="business-toast">{message}</div> : null
@@ -46,6 +64,7 @@ function PageHeader({ title, text, action }) {
 
 function HomePage() {
   const { activeBusiness } = useBusiness()
+  const navigate = useNavigate()
   const activeSurpluses = activeBusiness.surpluses.filter((item) => item.status !== 'Rescatado')
 
   return (
@@ -66,18 +85,28 @@ function HomePage() {
                 <h2>Excedentes activos</h2>
                 <p>Publicaciones que todavía pueden convertirse en rescate.</p>
               </div>
+              <button className="business-primary-action" type="button" onClick={() => navigate('excedentes/nuevo')}>
+                <Plus size={16} /> Publicar
+              </button>
             </div>
             <div className="business-active-surpluses">
-              {activeSurpluses.slice(0, 4).map((surplus) => (
-                <article key={surplus.id}>
-                  <img src={surplus.image} alt="" />
-                  <div>
-                    <span className={statusClass(surplus.status)}>{surplus.status}</span>
-                    <h3>{surplus.name}</h3>
-                    <p>{surplus.amount} · {surplus.date}</p>
-                  </div>
-                </article>
-              ))}
+              {activeSurpluses.length === 0 ? (
+                <EmptyState title="Sin excedentes activos" text="Publica el primer excedente del día." />
+              ) : (
+                activeSurpluses.slice(0, 4).map((surplus) => (
+                  <article key={surplus.id} className="business-active-surplus-item">
+                    <img src={surplus.image} alt="" />
+                    <div>
+                      <div className="business-active-surplus-badges">
+                        <span className={statusClass(surplus.status)}>{surplus.status}</span>
+                        {surplus.perishable && <span className="surplus-perishable-badge"><AlertTriangle size={11} /> Perecedero</span>}
+                      </div>
+                      <h3>{surplus.name}</h3>
+                      <p>{surplus.amount} · Hasta las {surplus.pickupTime ?? '—'}</p>
+                    </div>
+                  </article>
+                ))
+              )}
             </div>
           </section>
 
@@ -113,6 +142,52 @@ function HomePage() {
   )
 }
 
+function SurplusCard({ surplus, onEdit, onQuickUpdate, onDelete }) {
+  const navigate = useNavigate()
+  return (
+    <article className="business-surplus-card">
+      <div className="business-surplus-card__image-wrap">
+        <img src={surplus.image} alt="" />
+        {surplus.perishable && (
+          <span className="surplus-perishable-badge surplus-perishable-badge--overlay">
+            <AlertTriangle size={11} /> Perecedero
+          </span>
+        )}
+        {surplus.priority === 'Alta' && (
+          <span className="surplus-priority-badge">
+            <Star size={11} /> Alta prioridad
+          </span>
+        )}
+      </div>
+      <div className="business-surplus-card__body">
+        <div className="business-surplus-card__top">
+          <span className={statusClass(surplus.status)}>{surplus.status}</span>
+          {surplus.category && <span className="surplus-category-tag">{surplus.category}</span>}
+        </div>
+        <h3>{surplus.name}</h3>
+        <p>{surplus.description}</p>
+        <div className="business-surplus-card__meta">
+          <small>{surplus.amount}</small>
+          <small>{surplus.date}</small>
+          {surplus.pickupTime && <small>Hasta {surplus.pickupTime}</small>}
+        </div>
+        {surplus.perishable && surplus.expiresIn && (
+          <div className="surplus-expires-row">
+            <AlertTriangle size={12} /> Vence en: {surplus.expiresIn}
+          </div>
+        )}
+      </div>
+      <div className="business-row-actions">
+        <button type="button" title="Editar" onClick={() => onEdit(surplus)}><Pencil size={16} /></button>
+        <button type="button" title="Publicar" onClick={() => onQuickUpdate(surplus, 'Publicado')}><Upload size={16} /></button>
+        <button type="button" title="Pausar" onClick={() => onQuickUpdate(surplus, 'Pausado')}><Pause size={16} /></button>
+        <button type="button" title="Marcar rescatado" onClick={() => onQuickUpdate(surplus, 'Rescatado')}><Check size={16} /></button>
+        <button type="button" title="Eliminar" onClick={() => onDelete(surplus.id)}><Trash2 size={16} /></button>
+      </div>
+    </article>
+  )
+}
+
 function SurplusModal({ surplus, onClose, onSave }) {
   const [form, setForm] = useState(surplus ?? {
     name: '',
@@ -130,8 +205,8 @@ function SurplusModal({ surplus, onClose, onSave }) {
       <form className="business-modal" onSubmit={(event) => { event.preventDefault(); onSave(form) }}>
         <div className="business-modal__header">
           <div>
-            <span>{surplus ? 'Editar' : 'Nuevo excedente'}</span>
-            <h3>{surplus ? surplus.name : 'Publicar excedente'}</h3>
+            <span>{surplus ? 'Editar excedente' : 'Edición rápida'}</span>
+            <h3>{surplus ? surplus.name : 'Nuevo excedente'}</h3>
           </div>
           <button type="button" onClick={onClose}>Cerrar</button>
         </div>
@@ -148,6 +223,8 @@ function SurplusModal({ surplus, onClose, onSave }) {
             <option>En proceso</option>
             <option>Rescatado</option>
             <option>Pausado</option>
+            <option>Expirado</option>
+            <option>Cancelado</option>
           </select>
         </label>
         <div className="business-modal__actions">
@@ -161,6 +238,7 @@ function SurplusModal({ surplus, onClose, onSave }) {
 
 function SurplusesPage({ notify }) {
   const { activeBusiness, createSurplus, deleteSurplus, updateSurplus } = useBusiness()
+  const navigate = useNavigate()
   const [query, setQuery] = useState('')
   const [status, setStatus] = useState('Todos')
   const [page, setPage] = useState(1)
@@ -171,7 +249,7 @@ function SurplusesPage({ notify }) {
     (status === 'Todos' || surplus.status === status)
     && `${surplus.name} ${surplus.description}`.toLowerCase().includes(query.toLowerCase())
   ))
-  const pageSize = 4
+  const pageSize = 6
   const totalPages = Math.max(1, Math.ceil(filtered.length / pageSize))
   const visible = filtered.slice((page - 1) * pageSize, page * pageSize)
 
@@ -181,7 +259,7 @@ function SurplusesPage({ notify }) {
       notify('Excedente actualizado')
     } else {
       createSurplus(payload)
-      notify('Excedente publicado')
+      notify('Excedente publicado correctamente')
     }
     setModalOpen(false)
     setEditing(null)
@@ -192,12 +270,21 @@ function SurplusesPage({ notify }) {
     notify(`Estado cambiado a ${nextStatus}`)
   }
 
+  const handleDelete = (id) => {
+    deleteSurplus(id)
+    notify('Excedente eliminado')
+  }
+
   return (
     <>
       <PageHeader
         title="Excedentes"
-        text="La sección principal para publicar, pausar y cerrar rescates."
-        action={<button className="business-primary-action" type="button" onClick={() => setModalOpen(true)}><Plus size={18} /> Publicación rápida</button>}
+        text="Publica, pausa y cierra rescates desde aquí."
+        action={(
+          <button className="business-primary-action" type="button" onClick={() => navigate('nuevo')}>
+            <Plus size={18} /> Publicar excedente
+          </button>
+        )}
       />
       <section className="business-section business-page-card">
         <div className="business-toolbar">
@@ -208,6 +295,8 @@ function SurplusesPage({ notify }) {
             <option>En proceso</option>
             <option>Rescatado</option>
             <option>Pausado</option>
+            <option>Expirado</option>
+            <option>Cancelado</option>
           </select>
         </div>
         {visible.length === 0 ? (
@@ -215,29 +304,24 @@ function SurplusesPage({ notify }) {
         ) : (
           <div className="business-card-grid">
             {visible.map((surplus) => (
-              <article className="business-surplus-card" key={surplus.id}>
-                <img src={surplus.image} alt="" />
-                <div>
-                  <span className={statusClass(surplus.status)}>{surplus.status}</span>
-                  <h3>{surplus.name}</h3>
-                  <p>{surplus.description}</p>
-                  <small>{surplus.amount} · {surplus.date}</small>
-                </div>
-                <div className="business-row-actions">
-                  <button type="button" title="Editar" onClick={() => { setEditing(surplus); setModalOpen(true) }}><Pencil size={16} /></button>
-                  <button type="button" title="Publicar" onClick={() => quickUpdate(surplus, 'Publicado')}><Upload size={16} /></button>
-                  <button type="button" title="Pausar" onClick={() => quickUpdate(surplus, 'Pausado')}><Pause size={16} /></button>
-                  <button type="button" title="Marcar rescatado" onClick={() => quickUpdate(surplus, 'Rescatado')}><Check size={16} /></button>
-                  <button type="button" title="Eliminar" onClick={() => { deleteSurplus(surplus.id); notify('Excedente eliminado') }}><Trash2 size={16} /></button>
-                </div>
-              </article>
+              <SurplusCard
+                key={surplus.id}
+                surplus={surplus}
+                onEdit={(s) => { setEditing(s); setModalOpen(true) }}
+                onQuickUpdate={quickUpdate}
+                onDelete={handleDelete}
+              />
             ))}
           </div>
         )}
         <div className="business-pagination">
-          <button type="button" disabled={page === 1} onClick={() => setPage((current) => current - 1)}>Anterior</button>
+          <button type="button" disabled={page === 1} onClick={() => setPage((current) => current - 1)}>
+            <ChevronLeft size={16} /> Anterior
+          </button>
           <span>Página {page} de {totalPages}</span>
-          <button type="button" disabled={page === totalPages} onClick={() => setPage((current) => current + 1)}>Siguiente</button>
+          <button type="button" disabled={page === totalPages} onClick={() => setPage((current) => current + 1)}>
+            Siguiente <ChevronRight size={16} />
+          </button>
         </div>
       </section>
       {modalOpen && <SurplusModal surplus={editing} onClose={() => { setModalOpen(false); setEditing(null) }} onSave={saveSurplus} />}
@@ -351,33 +435,146 @@ function MetricsPage() {
 
 function SubscriptionMiniCard() {
   const { activeBusiness } = useBusiness()
+  const navigate = useNavigate()
   return (
     <section className="business-section business-subscription-mini">
-      <span className={statusClass(activeBusiness.subscription.status)}>{activeBusiness.subscription.status}</span>
+      <div className="business-sub-mini__top">
+        <span className={statusClass(activeBusiness.subscription.status)}>{activeBusiness.subscription.status}</span>
+        <CreditCard size={16} className="business-sub-mini__icon" />
+      </div>
       <h2>{activeBusiness.subscription.plan}</h2>
       <strong>{activeBusiness.subscription.price}<small>{activeBusiness.subscription.period}</small></strong>
       <p>Próximo pago: {activeBusiness.subscription.nextPayment}</p>
+      <button type="button" className="business-inline-button business-inline-button--full" onClick={() => navigate('suscripcion')}>
+        Gestionar suscripción
+      </button>
     </section>
   )
 }
 
 function SubscriptionPage({ notify }) {
   const { activeBusiness } = useBusiness()
+  const { subscription } = activeBusiness
+  const currentPlan = subscriptionPlans.find((p) => p.id === subscription.planId) ?? subscriptionPlans[1]
+
+  const usagePercent = (used, limit) => {
+    if (!limit) return Math.min((used / 20) * 100, 100)
+    return Math.min((used / limit) * 100, 100)
+  }
+
   return (
     <>
-      <PageHeader title="Suscripción" text="Plan actual, renovación y próximo pago en una vista limpia." />
-      <section className="business-section business-subscription-detail">
-        <span className={statusClass(activeBusiness.subscription.status)}>{activeBusiness.subscription.status}</span>
-        <h2>{activeBusiness.subscription.plan}</h2>
-        <strong>{activeBusiness.subscription.price}<small>{activeBusiness.subscription.period}</small></strong>
-        <p>Renovación: {activeBusiness.subscription.nextPayment}</p>
-        <div className="business-benefits">{activeBusiness.subscription.benefits.map((benefit) => <span key={benefit}>{benefit}</span>)}</div>
-        <div className="business-row-actions">
-          <button type="button" onClick={() => notify('Cambio de plan simulado')}>Cambiar plan</button>
-          <button type="button" onClick={() => notify('Renovación simulada completada')}>Renovar</button>
-          <button type="button" onClick={() => notify('Cancelación simulada registrada')}>Cancelar</button>
+      <PageHeader title="Suscripción" text="Plan actual, uso, renovación y cambio de plan." />
+
+      <div className="business-sub-layout">
+        {/* Current plan card */}
+        <section className="business-section business-sub-current">
+          <div className="business-sub-current__top">
+            <div>
+              <span className="business-sub-current__label">Plan actual</span>
+              <h2 className="business-sub-current__plan">{subscription.plan}</h2>
+            </div>
+            <span className={statusClass(subscription.status)}>{subscription.status}</span>
+          </div>
+
+          <div className="business-sub-current__price">
+            <span>{subscription.price}</span>
+            <small>{subscription.period}</small>
+          </div>
+
+          <div className="business-sub-meta-grid">
+            <div><span>Renovación</span><strong>{subscription.nextPayment}</strong></div>
+            <div><span>Método de pago</span><strong>{subscription.paymentMethod}</strong></div>
+            <div><span>Ciclo actual</span><strong>{subscription.cycle}</strong></div>
+          </div>
+
+          <ul className="business-benefits">
+            {(currentPlan?.features ?? subscription.benefits).map((benefit) => (
+              <li key={benefit}><Check size={14} /> {benefit}</li>
+            ))}
+          </ul>
+
+          <div className="business-sub-usage">
+            <div className="business-sub-usage__header">
+              <h3>Uso del plan</h3>
+              <span>{subscription.cycle}</span>
+            </div>
+            <div className="business-sub-usage-row">
+              <div className="business-sub-usage-row__labels">
+                <span>Excedentes publicados</span>
+                <strong>{subscription.usage.surpluses.used} / {subscription.usage.surpluses.limit ?? '∞'}</strong>
+              </div>
+              <div className="business-sub-usage-bar">
+                <div style={{ width: `${usagePercent(subscription.usage.surpluses.used, subscription.usage.surpluses.limit)}%` }} />
+              </div>
+            </div>
+            <div className="business-sub-usage-row">
+              <div className="business-sub-usage-row__labels">
+                <span>Donaciones realizadas</span>
+                <strong>{subscription.usage.donations.used} / {subscription.usage.donations.limit ?? '∞'}</strong>
+              </div>
+              <div className="business-sub-usage-bar">
+                <div style={{ width: `${usagePercent(subscription.usage.donations.used, subscription.usage.donations.limit)}%` }} />
+              </div>
+            </div>
+          </div>
+
+          <div className="business-sub-current__actions">
+            <button type="button" className="business-primary-action" onClick={() => notify('Gestión de plan simulada')}>Gestionar suscripción</button>
+            <button type="button" className="business-inline-button" onClick={() => notify('Cambio de plan simulado')}>Cambiar plan</button>
+          </div>
+        </section>
+
+        {/* Plans comparison */}
+        <section className="business-section business-page-card">
+          <div className="business-section__header">
+            <div>
+              <h2>Planes disponibles</h2>
+              <p>Escala cuando tu operación lo requiera.</p>
+            </div>
+          </div>
+          <div className="business-plans-grid">
+            {subscriptionPlans.map((plan) => {
+              const isCurrent = plan.id === subscription.planId
+              return (
+                <div key={plan.id} className={`business-plan-card${plan.popular ? ' is-popular' : ''}${isCurrent ? ' is-current' : ''}`}>
+                  {plan.popular && <div className="business-plan-card__badge">{plan.badge}</div>}
+                  {isCurrent && <div className="business-plan-card__current-badge">Plan actual</div>}
+                  <div className="business-plan-card__header">
+                    <h3>{plan.name}</h3>
+                    <p>{plan.description}</p>
+                  </div>
+                  <div className="business-plan-card__price">
+                    <span>{plan.price}</span>
+                    <small>{plan.period}</small>
+                  </div>
+                  <ul className="business-plan-card__features">
+                    {plan.features.map((f) => (
+                      <li key={f}><Check size={13} /> {f}</li>
+                    ))}
+                  </ul>
+                  <button
+                    type="button"
+                    className={isCurrent ? 'business-inline-button business-inline-button--full' : 'business-primary-action business-primary-action--full'}
+                    disabled={isCurrent}
+                    onClick={() => !isCurrent && notify(`Cambio a ${plan.name} simulado`)}
+                  >
+                    {isCurrent ? 'Plan actual' : `Contratar ${plan.name}`}
+                  </button>
+                </div>
+              )
+            })}
+          </div>
+        </section>
+
+        <div className="business-sub-danger">
+          <p>¿Quieres pausar o cancelar tu suscripción?</p>
+          <div>
+            <button type="button" className="business-inline-button" onClick={() => notify('Renovación confirmada')}>Renovar ahora</button>
+            <button type="button" className="business-danger-action" onClick={() => notify('Cancelación registrada (mock)')}>Cancelar suscripción</button>
+          </div>
         </div>
-      </section>
+      </div>
     </>
   )
 }
@@ -386,20 +583,46 @@ function BillingPage({ notify }) {
   const { activeBusiness } = useBusiness()
   return (
     <>
-      <PageHeader title="Facturación" text="Historial simple de pagos y facturas mock." />
-      <section className="business-section business-page-card">
-        <DataTable
-          columns={['Factura', 'Fecha', 'Monto', 'Estado', 'Concepto', 'Acciones']}
-          rows={activeBusiness.invoices.map((invoice) => [
-            invoice.id,
-            invoice.date,
-            invoice.amount,
-            invoice.status,
-            invoice.concept,
-            <button className="business-inline-button" type="button" key={invoice.id} onClick={() => notify('PDF mock descargado')}><Download size={15} /> PDF</button>,
-          ])}
-        />
-      </section>
+      <PageHeader
+        title="Facturación"
+        text="Historial de pagos, facturas y método de pago activo."
+        action={<button className="business-primary-action" type="button" onClick={() => notify('Reporte de facturación exportado')}><FileDown size={18} /> Exportar</button>}
+      />
+
+      <div className="business-billing-layout">
+        <section className="business-section business-billing-method">
+          <h2>Método de pago</h2>
+          <div className="business-billing-card">
+            <CreditCard size={22} />
+            <div>
+              <strong>{activeBusiness.subscription.paymentMethod}</strong>
+              <p>Método predeterminado · Próximo cargo {activeBusiness.subscription.nextPayment}</p>
+            </div>
+            <button type="button" className="business-inline-button" onClick={() => notify('Actualización de método simulada')}>Actualizar</button>
+          </div>
+        </section>
+
+        <section className="business-section business-page-card">
+          <div className="business-section__header">
+            <div>
+              <h2>Historial de pagos</h2>
+              <p>{activeBusiness.invoices.length} facturas · Todos los pagos completados</p>
+            </div>
+          </div>
+          <DataTable
+            columns={['Factura', 'Período', 'Monto', 'Estado', 'Concepto', 'Método', 'Acciones']}
+            rows={activeBusiness.invoices.map((invoice) => [
+              invoice.id,
+              invoice.period ?? invoice.date,
+              invoice.amount,
+              invoice.status,
+              invoice.concept,
+              invoice.method ?? activeBusiness.subscription.paymentMethod,
+              <button className="business-inline-button" type="button" key={invoice.id} onClick={() => notify('PDF mock descargado')}><Download size={15} /> PDF</button>,
+            ])}
+          />
+        </section>
+      </div>
     </>
   )
 }
@@ -524,7 +747,7 @@ function BusinessDashboardShell() {
   const [toast, setToast] = useState('')
   const notify = (message) => {
     setToast(message)
-    window.setTimeout(() => setToast(''), 2200)
+    window.setTimeout(() => setToast(''), 2800)
   }
 
   return (
@@ -536,6 +759,7 @@ function BusinessDashboardShell() {
           <Route index element={<Navigate to="inicio" replace />} />
           <Route path="inicio" element={<HomePage />} />
           <Route path="excedentes" element={<SurplusesPage notify={notify} />} />
+          <Route path="excedentes/nuevo" element={<PublishSurplusPage notify={notify} />} />
           <Route path="donaciones" element={<DonationsPage />} />
           <Route path="reportes" element={<ReportsPage notify={notify} />} />
           <Route path="metricas" element={<MetricsPage />} />

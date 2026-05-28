@@ -10,6 +10,8 @@
     linear-gradient(180deg, var(--color-background) 0%, var(--color-background-strong) 100%);
 }
 
+/* ─── Grid ───────────────────────────────────────────────────────── */
+
 .animated-background__grid {
   position: absolute;
   inset: 0;
@@ -18,8 +20,23 @@
     linear-gradient(var(--background-line) 1px, transparent 1px),
     linear-gradient(90deg, var(--background-line) 1px, transparent 1px);
   background-size: 56px 56px;
-  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.8), transparent 82%);
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.75), transparent 80%);
 }
+
+/* ─── Noise texture ──────────────────────────────────────────────── */
+/* Inline SVG fractal noise — no external file needed */
+
+.animated-background__noise {
+  position: absolute;
+  inset: 0;
+  opacity: 0.022;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px;
+  pointer-events: none;
+}
+
+/* ─── Ambient glows ──────────────────────────────────────────────── */
 
 .animated-background__glow {
   position: absolute;
@@ -30,29 +47,42 @@
   filter: blur(52px);
   opacity: var(--background-glow-opacity);
   animation: ambient-drift 18s ease-in-out infinite alternate;
+  will-change: transform;
 }
 
 .animated-background__glow--one {
-  top: 8%;
-  left: -8%;
+  top: 6%;
+  left: -10%;
 }
 
 .animated-background__glow--two {
   top: 34%;
-  right: -10%;
-  background: color-mix(in srgb, var(--color-accent), transparent 78%);
+  right: -12%;
+  background: color-mix(in srgb, var(--color-accent), transparent 80%);
   animation-duration: 22s;
   animation-delay: -5s;
 }
 
 .animated-background__glow--three {
-  left: 30%;
-  bottom: -16%;
-  width: clamp(280px, 38vw, 620px);
-  background: color-mix(in srgb, var(--color-secondary), transparent 72%);
+  left: 28%;
+  bottom: -18%;
+  width: clamp(280px, 40vw, 640px);
+  background: color-mix(in srgb, var(--color-secondary), transparent 74%);
   animation-duration: 20s;
   animation-delay: -9s;
 }
+
+.animated-background__glow--four {
+  top: 58%;
+  right: 18%;
+  width: clamp(200px, 24vw, 380px);
+  background: color-mix(in srgb, var(--color-accent), transparent 86%);
+  animation-duration: 26s;
+  animation-delay: -14s;
+  opacity: calc(var(--background-glow-opacity) * 0.75);
+}
+
+/* ─── Leaf decorations ───────────────────────────────────────────── */
 
 .animated-background__leaf {
   position: absolute;
@@ -63,6 +93,7 @@
   opacity: var(--background-deco-opacity);
   transform: rotate(38deg);
   animation: leaf-float 16s ease-in-out infinite;
+  will-change: transform;
 }
 
 .animated-background__leaf--one {
@@ -84,13 +115,15 @@
   animation-delay: -8s;
 }
 
+/* ─── Keyframes ──────────────────────────────────────────────────── */
+
 @keyframes ambient-drift {
   from {
     transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
   }
 
   to {
-    transform: translate3d(36px, -28px, 0) rotate(8deg) scale(1.08);
+    transform: translate3d(40px, -32px, 0) rotate(10deg) scale(1.1);
   }
 }
 
@@ -105,13 +138,32 @@
   }
 }
 
+/* ─── Responsive ─────────────────────────────────────────────────── */
+
 @media (max-width: 720px) {
   .animated-background__glow {
     filter: blur(44px);
-    opacity: calc(var(--background-glow-opacity) * 0.68);
+    opacity: calc(var(--background-glow-opacity) * 0.65);
+  }
+
+  .animated-background__glow--four {
+    display: none;
   }
 
   .animated-background__leaf {
     display: none;
+  }
+
+  .animated-background__noise {
+    display: none;
+  }
+}
+
+/* ─── Reduced motion ─────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .animated-background__glow,
+  .animated-background__leaf {
+    animation: none;
   }
 }
